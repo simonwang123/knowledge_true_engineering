@@ -1,0 +1,27 @@
+[project]
+name = "knowledge-true-engineering"
+version = "0.1.0"
+description = "Flexible GeoStudio parametric modelling, remeshing, and solving"
+requires-python = ">=3.12.1,<3.13"
+dependencies = [
+    "matplotlib>=3.9,<4",
+    "numpy>=2,<3",
+    "scikit-learn>=1.5,<2",
+    "scipy>=1.14,<2",
+    "threadpoolctl>=3.5,<4",
+    "shapely>=2.0,<3",
+]
+
+[project.scripts]
+geostudio-automation = "geostudio_automation.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["geostudio_automation"]
+
+[tool.ruff.lint]
+# Stage runners deliberately catch per-design failures so later experiments continue.
+ignore = ["BLE001"]
