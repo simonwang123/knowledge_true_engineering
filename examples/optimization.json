@@ -1,0 +1,23 @@
+{
+  "template": "../templates/geo_studio_model_sample",
+  "constraints": {
+    "crest_max_settlement_m": {"limit": 0.080, "direction": "<"},
+    "dam_max_settlement_m": {"limit": 0.16, "direction": "<"},
+    "dam_max_horizontal_displacement_m": {"limit": 0.075, "direction": "<"}
+  },
+  "material_unit_costs": {
+    "4": 100.0,
+    "5": 50.0,
+    "6": 110.0,
+    "12": 150.0
+  }
+  ,
+  "random_seed": 2026,
+  "initial_dataset": "../runs/lhs20_20261105/extracted/dataset.csv",
+  "initial_samples": 20,
+  "adaptive_budget": 40,
+  "total_budget": 60,
+  "r2_threshold": 0.75,
+  "gp_restarts": 3,
+  "candidate_count": 512
+}

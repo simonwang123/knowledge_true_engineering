@@ -1,0 +1,15 @@
+{
+  "template": "../templates/geo_studio_model_sample",
+  "simulation_only": true,
+  "constraints": {
+    "crest_max_settlement_m": {"limit": 0.085, "direction": "<="},
+    "dam_max_settlement_m": {"limit": 0.245, "direction": "<="},
+    "dam_max_horizontal_displacement_m": {"limit": 0.065, "direction": "<="}
+  },
+  "material_unit_costs": {"4": 100, "5": 70, "6": 120, "12": 150},
+  "initial_samples": 20,
+  "adaptive_budget": 3,
+  "total_budget": 23,
+  "gp_restarts": 0,
+  "candidate_count": 64
+}

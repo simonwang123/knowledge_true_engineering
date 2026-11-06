@@ -1,0 +1,3160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GSIData Version="11.11" AppVersion="25.2.0.700">
+  <FileInfo FileVersion="11.11" AppVersion="25.2.0.700" Author="YE" LastAuthor="PIN-771218" RevNumber="362" Date="2026-11-05" Time="12:06:42" />
+  <Analyses Len="10">
+    <Analysis>
+      <ID>1</ID>
+      <Name>施工前初始地应力</Name>
+      <Kind>SIGMA/W</Kind>
+      <Method>Insitu2</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Duration Missing="true" />
+        <TimeSteps Len="1">
+          <TimeStep Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="1e-05" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="300" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions GravityActivation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>2</ID>
+      <Name>第一层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>1</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <ExcludeInitDeformation>true</ExcludeInitDeformation>
+      <TimeIncrements>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="0.3333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="0.6666666666666666" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="1" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>3</ID>
+      <Name>第二层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>2</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>1</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="1.3333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="1.6666666666666665" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="2" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>4</ID>
+      <Name>第三层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>3</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>2</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="2.3333333333333335" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="2.6666666666666665" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="3" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>5</ID>
+      <Name>第四层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>4</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>3</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="3.3333333333333335" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="3.6666666666666665" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="4" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>6</ID>
+      <Name>第五层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>5</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>4</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="4.333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="4.666666666666667" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="5" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>7</ID>
+      <Name>第六层浇筑应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>6</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>5</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="5.333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="5.666666666666667" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="6" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>8</ID>
+      <Name>上游面板浇筑</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>7</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>6</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="6.333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="6.666666666666667" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="7" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>9</ID>
+      <Name>浇筑完成</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>8</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>7</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="7.333333333333333" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="7.666666666666667" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="8" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+    <Analysis>
+      <ID>10</ID>
+      <Name>正常蓄水位应力分布</Name>
+      <Kind>SIGMA/W</Kind>
+      <ParentID>9</ParentID>
+      <Method>Load</Method>
+      <GeometryId>1</GeometryId>
+      <TimeIncrements>
+        <Start>8</Start>
+        <Duration>1</Duration>
+        <IncrementCount>3</IncrementCount>
+        <TimeSteps Len="3">
+          <TimeStep Step="0.3333333333333333" ElapsedTime="8.333333333333334" Save="true" />
+          <TimeStep Step="0.3333333333333333" ElapsedTime="8.666666666666666" Save="true" />
+          <TimeStep Step="0.33333333333333337" ElapsedTime="9" Save="true" />
+        </TimeSteps>
+      </TimeIncrements>
+      <ConvergenceCriteria Len="2">
+        <Convergence>
+          <Key>UnbalancedEnergy</Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.001" />
+        </Convergence>
+        <Convergence>
+          <Key>TolerableRelativeErrorStress </Key>
+          <Entry NumberOfSignificantDigits="3" MaximumTolerableDifference="0.005" />
+        </Convergence>
+      </ConvergenceCriteria>
+      <IterationControls Len="1">
+        <IterationControl>
+          <Key>Stress</Key>
+          <Entry MaxIterations="200" MaxReviewIterations="10" />
+        </IterationControl>
+      </IterationControls>
+      <ComputedPhysics Stress="true" />
+      <PhysicsOptions LoadDeformation="true" />
+    </Analysis>
+  </Analyses>
+  <BCs Len="21">
+    <BC ID="1" Name="Fixed X" Color="RGB=(192,0,0)" XDisp="DispDisplacementX(Variability=Constant,Value=0)" YDisp="ForceDispUndefined()" />
+    <BC ID="2" Name="Fixed Y" Color="RGB=(192,0,0)" XDisp="ForceDispUndefined()" YDisp="DispDisplacementY(Variability=Constant,Value=0)" />
+    <BC ID="3" Name="Fixed X/Y" Color="RGB=(192,0,0)" XDisp="DispDisplacementX(Variability=Constant,Value=0)" YDisp="DispDisplacementY(Variability=Constant,Value=0)" />
+    <BC ID="4" Name="正常蓄水位到死水位" Color="RGB=(192,0,0)" Hydraulic="HydHeadvsTime(Variability=Function,HydHeadvsTimeFnNum=3,Review=false)" />
+    <BC ID="5" Name="Drainage" Color="RGB=(128,0,128)" Hydraulic="HydTotalFlux(Variability=Constant,Value=0,Review=true)" />
+    <BC ID="6" Name="Unit Concentration" Color="RGB=(192,0,0)" Contaminant="ContamConcentrationVsTime(Variability=Constant,Value=1e-06)" />
+    <BC ID="7" Name="Zero Rotation" Color="RGB=(192,0,0)" Rotation="ZeroRotation()" />
+    <BC ID="8" Name="Atmospheric - Zero" Color="RGB=(192,0,0)" Air="AirPressure(Variability=Constant,Value=0)" />
+    <BC ID="9" Name="正常蓄水位" Color="RGB=(0,255,255)" Hydraulic="HydHeadvsTime(Variability=Constant,Value=474,Review=false)" />
+    <BC ID="10" Name="设计洪水位上游" Color="RGB=(0,192,255)" Hydraulic="HydHeadvsTime(Variability=Constant,Value=476.2,Review=false)" />
+    <BC ID="11" Name="设计洪水位下游" Color="RGB=(0,192,192)" Hydraulic="HydHeadvsTime(Variability=Constant,Value=421.1,Review=false)" />
+    <BC ID="12" Name="校核洪水位上游" Color="RGB=(0,128,255)" Hydraulic="HydHeadvsTime(Variability=Constant,Value=476.9,Review=false)" />
+    <BC ID="13" Name="校核洪水位下游" Color="RGB=(0,160,192)" Hydraulic="HydHeadvsTime(Variability=Constant,Value=421.3,Review=false)" />
+    <BC ID="14" Name="设计洪水位骤降" Color="RGB=(0,74,255)" Hydraulic="HydHeadvsTime(Variability=Function,HydHeadvsTimeFnNum=1,Review=false)" />
+    <BC ID="15" Name="校核洪水位骤降" Color="RGB=(0,0,128)" Hydraulic="HydHeadvsTime(Variability=Function,HydHeadvsTimeFnNum=2,Review=false)" />
+    <BC ID="16" Name="设计洪水位骤降 (2)" Color="RGB=(0,0,255)" XDisp="DispHydrostaticPressureX(Variability=Function,DispElevationFnNum=1,UnitWeightPerUnitDepth=9.807)" YDisp="DispHydrostaticPressureY(Variability=Function,DispElevationFnNum=1,UnitWeightPerUnitDepth=9.807)" ZDisp="Undefined()" />
+    <BC ID="17" Name="正常蓄水位 (2)" Color="RGB=(0,0,255)" XDisp="DispHydrostaticPressureX(Variability=Constant,Value=474,UnitWeightPerUnitDepth=9.807)" YDisp="DispHydrostaticPressureY(Variability=Constant,Value=474,UnitWeightPerUnitDepth=9.807)" ZDisp="Undefined()" />
+    <BC ID="18" Name="下游地面线" Color="RGB=(0,0,255)" XDisp="DispHydrostaticPressureX(Variability=Constant,Value=420,UnitWeightPerUnitDepth=9.807)" YDisp="DispHydrostaticPressureY(Variability=Constant,Value=420,UnitWeightPerUnitDepth=9.807)" ZDisp="Undefined()" />
+    <BC ID="19" Name="死水位" Hydraulic="HydHeadvsTime(Variability=Constant,Value=448,Review=false)" />
+    <BC ID="20" Name="设计洪水位上" Color="RGB=(0,0,255)" XDisp="DispHydrostaticPressureX(Variability=Constant,Value=476.2,UnitWeightPerUnitDepth=9.807)" YDisp="DispHydrostaticPressureY(Variability=Constant,Value=476.2,UnitWeightPerUnitDepth=9.807)" ZDisp="Undefined()" />
+    <BC ID="21" Name="死水位 (2)" Color="RGB=(0,0,255)" XDisp="DispHydrostaticPressureX(Variability=Constant,Value=448,UnitWeightPerUnitDepth=9.807)" YDisp="DispHydrostaticPressureY(Variability=Constant,Value=448,UnitWeightPerUnitDepth=9.807)" ZDisp="Undefined()" />
+  </BCs>
+  <Contexts Len="10">
+    <Context>
+      <AnalysisID>1</AnalysisID>
+      <GeometryUsesMaterials Len="1">
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>2</AnalysisID>
+      <GeometryUsesMaterials Len="4">
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>3</AnalysisID>
+      <GeometryUsesMaterials Len="9">
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>4</AnalysisID>
+      <GeometryUsesMaterials Len="12">
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>5</AnalysisID>
+      <GeometryUsesMaterials Len="15">
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>6</AnalysisID>
+      <GeometryUsesMaterials Len="19">
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-7" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-17" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-30" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-32" Entry="5" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>7</AnalysisID>
+      <GeometryUsesMaterials Len="23">
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-7" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-14" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-17" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-27" Entry="12" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-30" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-31" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-32" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-33" Entry="5" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>8</AnalysisID>
+      <GeometryUsesMaterials Len="31">
+        <GeometryUsesMaterial ID="Regions-1" Entry="13" />
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-3" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-4" Entry="10" />
+        <GeometryUsesMaterial ID="Regions-5" Entry="11" />
+        <GeometryUsesMaterial ID="Regions-6" Entry="8" />
+        <GeometryUsesMaterial ID="Regions-7" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-12" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-14" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-15" Entry="3" />
+        <GeometryUsesMaterial ID="Regions-16" Entry="1" />
+        <GeometryUsesMaterial ID="Regions-17" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-27" Entry="12" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-30" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-31" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-32" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-33" Entry="5" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>9</AnalysisID>
+      <GeometryUsesMaterials Len="33">
+        <GeometryUsesMaterial ID="Regions-1" Entry="13" />
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-3" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-4" Entry="10" />
+        <GeometryUsesMaterial ID="Regions-5" Entry="11" />
+        <GeometryUsesMaterial ID="Regions-6" Entry="8" />
+        <GeometryUsesMaterial ID="Regions-7" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-12" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-14" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-15" Entry="3" />
+        <GeometryUsesMaterial ID="Regions-16" Entry="1" />
+        <GeometryUsesMaterial ID="Regions-17" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-18" Entry="1" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-20" Entry="7" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-27" Entry="12" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-30" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-31" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-32" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-33" Entry="5" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="3">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="3">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+      </GeometryUsesYDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+    <Context>
+      <AnalysisID>10</AnalysisID>
+      <GeometryUsesMaterials Len="33">
+        <GeometryUsesMaterial ID="Regions-1" Entry="13" />
+        <GeometryUsesMaterial ID="Regions-2" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-3" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-4" Entry="10" />
+        <GeometryUsesMaterial ID="Regions-5" Entry="11" />
+        <GeometryUsesMaterial ID="Regions-6" Entry="8" />
+        <GeometryUsesMaterial ID="Regions-7" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-8" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-9" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-10" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-11" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-12" Entry="2" />
+        <GeometryUsesMaterial ID="Regions-13" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-14" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-15" Entry="3" />
+        <GeometryUsesMaterial ID="Regions-16" Entry="1" />
+        <GeometryUsesMaterial ID="Regions-17" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-18" Entry="1" />
+        <GeometryUsesMaterial ID="Regions-19" Entry="9" />
+        <GeometryUsesMaterial ID="Regions-20" Entry="7" />
+        <GeometryUsesMaterial ID="Regions-21" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-22" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-23" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-24" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-25" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-26" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-27" Entry="12" />
+        <GeometryUsesMaterial ID="Regions-28" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-29" Entry="6" />
+        <GeometryUsesMaterial ID="Regions-30" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-31" Entry="4" />
+        <GeometryUsesMaterial ID="Regions-32" Entry="5" />
+        <GeometryUsesMaterial ID="Regions-33" Entry="5" />
+      </GeometryUsesMaterials>
+      <GeometryUsesXDispBCs Len="9">
+        <GeometryUsesXDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesXDispBC ID="Lines-36" Entry="3" />
+        <GeometryUsesXDispBC ID="Lines-34" Entry="17" />
+        <GeometryUsesXDispBC ID="Lines-21" Entry="17" />
+        <GeometryUsesXDispBC ID="Lines-20" Entry="17" />
+        <GeometryUsesXDispBC ID="Lines-46" Entry="17" />
+        <GeometryUsesXDispBC ID="Lines-50" Entry="17" />
+        <GeometryUsesXDispBC ID="Lines-56" Entry="18" />
+      </GeometryUsesXDispBCs>
+      <GeometryUsesYDispBCs Len="9">
+        <GeometryUsesYDispBC ID="Lines-35" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-61" Entry="1" />
+        <GeometryUsesYDispBC ID="Lines-36" Entry="3" />
+        <GeometryUsesYDispBC ID="Lines-34" Entry="17" />
+        <GeometryUsesYDispBC ID="Lines-21" Entry="17" />
+        <GeometryUsesYDispBC ID="Lines-20" Entry="17" />
+        <GeometryUsesYDispBC ID="Lines-46" Entry="17" />
+        <GeometryUsesYDispBC ID="Lines-50" Entry="17" />
+        <GeometryUsesYDispBC ID="Lines-56" Entry="18" />
+      </GeometryUsesYDispBCs>
+      <GeometryUsesZDispBCs Len="6">
+        <GeometryUsesZDispBC ID="Lines-34" Entry="17" />
+        <GeometryUsesZDispBC ID="Lines-21" Entry="17" />
+        <GeometryUsesZDispBC ID="Lines-20" Entry="17" />
+        <GeometryUsesZDispBC ID="Lines-46" Entry="17" />
+        <GeometryUsesZDispBC ID="Lines-50" Entry="17" />
+        <GeometryUsesZDispBC ID="Lines-56" Entry="18" />
+      </GeometryUsesZDispBCs>
+      <IsDefined>true</IsDefined>
+    </Context>
+  </Contexts>
+  <Coordinates>
+    <EngCoords HorzScale="200" XPageLeft="0" YPageBottom="272" XPageRight="719" YPageTop="561.81481" XPageOrg="-0" YPageOrg="-272" MaxSnapDist="20" UnitSystem="Metric" LockScales="false" VertScale="200" />
+    <PageCoords Units="in" PageWidth="141.5354330708661" PageHeight="57.05015944881889" PageXOrg="-0" PageYOrg="-53.54330708661418" />
+  </Coordinates>
+  <Functions>
+    <Boundary>
+      <Hydraulic>
+        <BoundFns Len="3">
+          <BoundFn>
+            <ID>1</ID>
+            <Name>设计洪水位骤降</Name>
+            <Function>Spline(OutputParam=TotalHead,InputParam=Time,Smooth=100,Tension=100,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="2">
+              <Point X="0" Y="476.2" />
+              <Point X="21600" Y="448" />
+            </Points>
+          </BoundFn>
+          <BoundFn>
+            <ID>2</ID>
+            <Name>校核洪水位骤降</Name>
+            <Function>Spline(OutputParam=TotalHead,InputParam=Time,Smooth=100,Tension=100,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="2">
+              <Point X="0" Y="476.9" />
+              <Point X="21600" Y="448" />
+            </Points>
+          </BoundFn>
+          <BoundFn>
+            <ID>3</ID>
+            <Name>正常蓄水位到死水位</Name>
+            <Function>Spline(OutputParam=TotalHead,InputParam=Time,Smooth=100,Tension=100,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="2">
+              <Point X="0" Y="474" />
+              <Point X="32400" Y="447" />
+            </Points>
+          </BoundFn>
+        </BoundFns>
+      </Hydraulic>
+      <StressStrain>
+        <BoundFns Len="2">
+          <BoundFn>
+            <ID>1</ID>
+            <Name>设计洪水位骤降</Name>
+            <Function>Spline(OutputParam=FluidBoundaryElevation,InputParam=Time,Smooth=100,Tension=100,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="2">
+              <Point X="0" Y="476.2" />
+              <Point X="21600" Y="448" />
+            </Points>
+          </BoundFn>
+          <BoundFn>
+            <ID>2</ID>
+            <Name>新建函数</Name>
+            <Function>Step(OutputParam=XBoundaryForce,InputParam=Time,SlopeAfter=0)</Function>
+          </BoundFn>
+        </BoundFns>
+      </StressStrain>
+    </Boundary>
+    <Material>
+      <Hydraulic>
+        <VolWCFns Len="1">
+          <VolWCFn>
+            <ID>1</ID>
+            <Name>新建函数</Name>
+            <Function>VolWCSpline(OutputParam=VolWaterContent,InputParam=PoreWaterPressure,Beta=0,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=true,LogOutput=false)</Function>
+            <Estimate>FnEstVolWC(OutputParam=VolWaterContent,InputParam=PoreWaterPressure,VolWCEstMethod=SampleMatls,SatWC=0,SampleMatlVolWC=Rock,LiqLimit=0,D10=0,D60=0,HydEstMax=1000,HydEstMin=0.01,NumPoints=20)</Estimate>
+          </VolWCFn>
+        </VolWCFns>
+      </Hydraulic>
+      <StressStrain>
+        <CyclicNumFns Len="1">
+          <CyclicNumFn>
+            <ID>1</ID>
+            <Name>全风化层</Name>
+            <Function>Spline(OutputParam=CyclicNumber,InputParam=ShearStressRatio,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=true)</Function>
+            <Points Len="4">
+              <Point X="0.27" Y="1000" />
+              <Point X="0.35" Y="100" />
+              <Point X="0.47" Y="10" />
+              <Point X="0.7" Y="1.000000000000001" />
+            </Points>
+            <Estimate>FnEstCyclicNumber(OutputParam=CyclicNumber,InputParam=ShearStressRatio,SampleMatlCyclicNumber=DenseSand)</Estimate>
+          </CyclicNumFn>
+        </CyclicNumFns>
+        <EModulusFns Len="6">
+          <EModulusFn>
+            <ID>1</ID>
+            <Name>主堆石区邓肯张应力模型</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=59,Tension=45,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="9">
+              <Point X="0.505" Y="8529" />
+              <Point X="1.01" Y="12315" />
+              <Point X="10.1" Y="41730" />
+              <Point X="20.2" Y="60255" />
+              <Point X="30.3" Y="74700" />
+              <Point X="40.4" Y="87004" />
+              <Point X="101" Y="141400" />
+              <Point X="202" Y="204171" />
+              <Point X="303" Y="253118" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+          <EModulusFn>
+            <ID>2</ID>
+            <Name>次堆石区邓肯张应力模型</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=48,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="9">
+              <Point X="0.5005" Y="6823" />
+              <Point X="1.01" Y="9852" />
+              <Point X="10.1" Y="33384" />
+              <Point X="20.2" Y="48204" />
+              <Point X="101" Y="113120" />
+              <Point X="202" Y="163337" />
+              <Point X="303" Y="202494" />
+              <Point X="1010" Y="660508" />
+              <Point X="10100" Y="2.238095e+06" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+          <EModulusFn>
+            <ID>3</ID>
+            <Name>垫层邓肯张应力模型</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="8">
+              <Point X="0.505" Y="18110" />
+              <Point X="1.01" Y="24398" />
+              <Point X="10.1" Y="65668" />
+              <Point X="20.2" Y="88471" />
+              <Point X="30.3" Y="105322" />
+              <Point X="101" Y="176750" />
+              <Point X="202" Y="238123" />
+              <Point X="303" Y="283479" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+          <EModulusFn>
+            <ID>4</ID>
+            <Name>排水邓肯张应力模型</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="1">
+              <Point X="101" Y="151500" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+          <EModulusFn>
+            <ID>5</ID>
+            <Name>地基</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=100,Tension=51,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="4">
+              <Point X="1.01" Y="44655" />
+              <Point X="10.1" Y="93299" />
+              <Point X="101" Y="194930" />
+              <Point X="10100" Y="850900" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+          <EModulusFn>
+            <ID>6</ID>
+            <Name>过渡料</Name>
+            <Function>Spline(OutputParam=EModulus,InputParam=YEffectiveStress,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="4">
+              <Point X="1.01" Y="12034" />
+              <Point X="10.1" Y="42698" />
+              <Point X="101" Y="151500" />
+              <Point X="1010" Y="537542" />
+            </Points>
+            <Estimate>FnEstEMod(OutputParam=EModulus,InputParam=YEffectiveStress,Depth=1,KModifier=1,NExponent=0.5,K0=1)</Estimate>
+          </EModulusFn>
+        </EModulusFns>
+        <SeedPWPFns Len="1">
+          <SeedPWPFn>
+            <ID>1</ID>
+            <Name>PWP</Name>
+            <Function>Spline(OutputParam=PWPRatio,InputParam=CyclicNumberRatio,Smooth=100,Tension=100,SlopeBefore=0,SlopeAfter=0,LogInput=false,LogOutput=false)</Function>
+            <Points Len="21">
+              <Point X="0" Y="0" />
+              <Point X="0.05" Y="0.07508971578244417" />
+              <Point X="0.1" Y="0.1236887456305335" />
+              <Point X="0.15" Y="0.1660776189634008" />
+              <Point X="0.2" Y="0.2051925892248534" />
+              <Point X="0.25" Y="0.2423118648764473" />
+              <Point X="0.3" Y="0.2781656041094622" />
+              <Point X="0.35" Y="0.3132436249817397" />
+              <Point X="0.4" Y="0.3479164994021272" />
+              <Point X="0.45" Y="0.3824949219271687" />
+              <Point X="0.5" Y="0.4172650210073318" />
+              <Point X="0.55" Y="0.4525144219930542" />
+              <Point X="0.6000000000000001" Y="0.4885568750809051" />
+              <Point X="0.65" Y="0.5257618336442371" />
+              <Point X="0.7000000000000001" Y="0.5645975231591346" />
+              <Point X="0.75" Y="0.6057035822738319" />
+              <Point X="0.8" Y="0.6500305617830593" />
+              <Point X="0.8500000000000001" Y="0.6991500117574208" />
+              <Point X="0.9" Y="0.756101242363323" />
+              <Point X="0.9500000000000001" Y="0.8287201517260561" />
+              <Point X="1" Y="1" />
+            </Points>
+            <Estimate>FnEstDynPWP(OutputParam=PWPRatio,InputParam=CyclicNumberRatio,NExponent=0.7)</Estimate>
+          </SeedPWPFn>
+        </SeedPWPFns>
+        <StrengthFns Len="5">
+          <StrengthFn>
+            <ID>1</ID>
+            <Name>主堆石区</Name>
+            <Function>Spline(OutputParam=ShearStress,InputParam=NormalStress,Smooth=100,Tension=100,SlopeBefore=Calc,SlopeAfter=Calc,LogInput=false,LogOutput=false)</Function>
+            <Points Len="22">
+              <Point X="150" Y="152.0373137" />
+              <Point X="250" Y="234.5028487" />
+              <Point X="350" Y="311.91205" />
+              <Point X="450" Y="385.9045288" />
+              <Point X="550" Y="457.3287427" />
+              <Point X="650" Y="526.702457" />
+              <Point X="750" Y="594.3737899" />
+              <Point X="850" Y="660.5923912" />
+              <Point X="950" Y="725.5457655" />
+              <Point X="1050" Y="789.379733" />
+              <Point X="1150" Y="852.2108256" />
+              <Point X="1250" Y="914.1342296" />
+              <Point X="1350" Y="975.2291049" />
+              <Point X="1450" Y="1035.562281" />
+              <Point X="1550" Y="1095.190901" />
+              <Point X="1650" Y="1154.164367" />
+              <Point X="1750" Y="1212.525794" />
+              <Point X="1850" Y="1270.31313" />
+              <Point X="1950" Y="1327.560021" />
+              <Point X="2050" Y="1384.296494" />
+              <Point X="2150" Y="1440.54951" />
+              <Point X="2250" Y="1496.3434" />
+            </Points>
+          </StrengthFn>
+          <StrengthFn>
+            <ID>2</ID>
+            <Name>次堆石区</Name>
+            <Function>Spline(OutputParam=ShearStress,InputParam=NormalStress,Smooth=100,Tension=100,SlopeBefore=Calc,SlopeAfter=Calc,LogInput=false,LogOutput=false)</Function>
+            <Points Len="22">
+              <Point X="150" Y="96.34438853" />
+              <Point X="250" Y="147.225877" />
+              <Point X="350" Y="194.2693793" />
+              <Point X="450" Y="238.6777476" />
+              <Point X="550" Y="281.0829423" />
+              <Point X="650" Y="321.8748245" />
+              <Point X="750" Y="361.3177535" />
+              <Point X="850" Y="399.6026414" />
+              <Point X="950" Y="436.8737293" />
+              <Point X="1050" Y="473.243771" />
+              <Point X="1150" Y="508.8032846" />
+              <Point X="1250" Y="543.6265088" />
+              <Point X="1350" Y="577.7754111" />
+              <Point X="1450" Y="611.3024826" />
+              <Point X="1550" Y="644.2527457" />
+              <Point X="1650" Y="676.665234" />
+              <Point X="1750" Y="708.5741062" />
+              <Point X="1850" Y="740.0095006" />
+              <Point X="1950" Y="770.9982016" />
+              <Point X="2050" Y="801.5641665" />
+              <Point X="2150" Y="831.728949" />
+              <Point X="2250" Y="861.5120407" />
+            </Points>
+          </StrengthFn>
+          <StrengthFn>
+            <ID>3</ID>
+            <Name>d</Name>
+            <Function>Spline(OutputParam=ShearStress,InputParam=NormalStress,Smooth=100,Tension=100,SlopeBefore=Calc,SlopeAfter=Calc,LogInput=false,LogOutput=false)</Function>
+            <Points Len="22">
+              <Point X="150" Y="209.9834411" />
+              <Point X="250" Y="320.7257273" />
+              <Point X="350" Y="424.3731826" />
+              <Point X="450" Y="523.3076666" />
+              <Point X="550" Y="618.7411517" />
+              <Point X="650" Y="711.4045052" />
+              <Point X="750" Y="801.7846332" />
+              <Point X="850" Y="890.2281177" />
+              <Point X="950" Y="976.9936341" />
+              <Point X="1050" Y="1062.281265" />
+              <Point X="1150" Y="1146.250148" />
+              <Point X="1250" Y="1229.029721" />
+              <Point X="1350" Y="1310.727223" />
+              <Point X="1450" Y="1391.432874" />
+              <Point X="1550" Y="1471.223575" />
+              <Point X="1650" Y="1550.165616" />
+              <Point X="1750" Y="1628.316696" />
+              <Point X="1850" Y="1705.727472" />
+              <Point X="1950" Y="1782.44275" />
+              <Point X="2050" Y="1858.502435" />
+              <Point X="2150" Y="1933.942277" />
+              <Point X="2250" Y="2008.794479" />
+            </Points>
+          </StrengthFn>
+          <StrengthFn>
+            <ID>4</ID>
+            <Name>g</Name>
+            <Function>Spline(OutputParam=ShearStress,InputParam=NormalStress,Smooth=100,Tension=100,SlopeBefore=Calc,SlopeAfter=Calc,LogInput=false,LogOutput=false)</Function>
+            <Points Len="22">
+              <Point X="150" Y="213.7353467" />
+              <Point X="250" Y="322.9301916" />
+              <Point X="350" Y="424.3757628" />
+              <Point X="450" Y="520.696908" />
+              <Point X="550" Y="613.2227214" />
+              <Point X="650" Y="702.7520123" />
+              <Point X="750" Y="789.8156063" />
+              <Point X="850" Y="874.7905891" />
+              <Point X="950" Y="957.9579388" />
+              <Point X="1050" Y="1039.534686" />
+              <Point X="1150" Y="1119.693243" />
+              <Point X="1250" Y="1198.573698" />
+              <Point X="1350" Y="1276.292004" />
+              <Point X="1450" Y="1352.945637" />
+              <Point X="1550" Y="1428.61762" />
+              <Point X="1650" Y="1503.379469" />
+              <Point X="1750" Y="1577.293398" />
+              <Point X="1850" Y="1650.413994" />
+              <Point X="1950" Y="1722.789518" />
+              <Point X="2050" Y="1794.462928" />
+              <Point X="2150" Y="1865.472694" />
+              <Point X="2250" Y="1935.853456" />
+            </Points>
+          </StrengthFn>
+          <StrengthFn>
+            <ID>5</ID>
+            <Name>压坡</Name>
+            <Function>Spline(OutputParam=ShearStress,InputParam=NormalStress,Smooth=100,Tension=100,SlopeBefore=Calc,SlopeAfter=Calc,LogInput=false,LogOutput=false)</Function>
+            <Points Len="22">
+              <Point X="150" Y="94.92307699" />
+              <Point X="250" Y="144.9664565" />
+              <Point X="350" Y="191.1964346" />
+              <Point X="450" Y="234.8070266" />
+              <Point X="550" Y="276.425805" />
+              <Point X="650" Y="316.4400373" />
+              <Point X="750" Y="355.1123847" />
+              <Point X="850" Y="392.6325688" />
+              <Point X="950" Y="429.1439543" />
+              <Point X="1050" Y="464.7586259" />
+              <Point X="1150" Y="499.5665754" />
+              <Point X="1250" Y="533.6416185" />
+              <Point X="1350" Y="567.0453757" />
+              <Point X="1450" Y="599.8300486" />
+              <Point X="1550" Y="632.0404156" />
+              <Point X="1650" Y="663.7153017" />
+              <Point X="1750" Y="694.8886855" />
+              <Point X="1850" Y="725.5905482" />
+              <Point X="1950" Y="755.8475367" />
+              <Point X="2050" Y="785.6834868" />
+              <Point X="2150" Y="815.1198435" />
+              <Point X="2250" Y="844.1760019" />
+            </Points>
+          </StrengthFn>
+        </StrengthFns>
+      </StressStrain>
+    </Material>
+  </Functions>
+  <Geometries Len="1">
+    <Geometry>
+      <Name>2维几何模型</Name>
+      <MeshId>1</MeshId>
+      <MeshDefaultEdgeLength>4</MeshDefaultEdgeLength>
+      <Points Len="71">
+        <Point ID="1" X="242.69354" Y="478" />
+        <Point ID="2" X="233.4" Y="478" />
+        <Point ID="3" X="233.4" Y="475" />
+        <Point ID="4" X="247.47482" Y="475" />
+        <Point ID="5" X="243.54354" Y="478" />
+        <Point ID="6" X="289.31921" Y="448.7449" />
+        <Point ID="7" X="259.96068" Y="467.1658" />
+        <Point ID="8" X="326.90008" Y="425.16493" />
+        <Point ID="9" X="142.62072" Y="407.75" />
+        <Point ID="10" X="240.4" Y="475" />
+        <Point ID="11" X="236.4" Y="475" />
+        <Point ID="12" X="138.62072" Y="407.75" />
+        <Point ID="13" X="142.37072" Y="404" />
+        <Point ID="14" X="146.37072" Y="404" />
+        <Point ID="15" X="134.53024" Y="407" />
+        <Point ID="16" X="136.33024" Y="407" />
+        <Point ID="17" X="139.37072" Y="404" />
+        <Point ID="18" X="130.16834" Y="404" />
+        <Point ID="19" X="157.45682" Y="425.4" />
+        <Point ID="20" X="160.4604" Y="425.4" />
+        <Point ID="21" X="161.91919" Y="426.4" />
+        <Point ID="22" X="155.91562" Y="426.4" />
+        <Point ID="23" X="116.16834" Y="412" />
+        <Point ID="24" X="121.16834" Y="407" />
+        <Point ID="25" X="233.4" Y="475.4" />
+        <Point ID="26" X="130.40928" Y="404.8" />
+        <Point ID="27" X="124.16834" Y="404.8" />
+        <Point ID="28" X="124.16834" Y="404" />
+        <Point ID="29" X="129.76834" Y="404" />
+        <Point ID="30" X="127.96834" Y="404" />
+        <Point ID="31" X="127.96834" Y="378" />
+        <Point ID="32" X="129.76834" Y="378" />
+        <Point ID="33" X="0" Y="412" />
+        <Point ID="34" X="0" Y="272" />
+        <Point ID="35" X="558.25" Y="272" />
+        <Point ID="36" X="167.94145" Y="425.16493" />
+        <Point ID="37" X="189.34493" Y="439.88568" />
+        <Point ID="38" X="249.44665" Y="439.88568" />
+        <Point ID="39" X="303.43871" Y="439.88568" />
+        <Point ID="40" X="246.71707" Y="448.7449" />
+        <Point ID="41" X="202.22595" Y="448.7449" />
+        <Point ID="42" X="278.44197" Y="455.56978" />
+        <Point ID="43" X="244.61429" Y="455.56978" />
+        <Point ID="44" X="212.14911" Y="455.56978" />
+        <Point ID="45" X="229.00933" Y="467.1658" />
+        <Point ID="46" X="193.42909" Y="448" Pinned="true" />
+        <Point ID="47" X="231.35769" Y="474" />
+        <Point ID="48" X="241.8645" Y="464.49464" />
+        <Point ID="49" X="253.38936" Y="427.08902" />
+        <Point ID="50" X="360.63195" Y="404" />
+        <Point ID="51" X="510" Y="404" />
+        <Point ID="52" X="558.25" Y="404" />
+        <Point ID="53" X="292.45688" Y="446.77618" />
+        <Point ID="54" X="374" Y="446.77618" />
+        <Point ID="55" X="293.43188" Y="446.77618" />
+        <Point ID="56" X="261.68695" Y="464.49464" />
+        <Point ID="57" X="309.59128" Y="427.08902" />
+        <Point ID="58" X="273.11676" Y="455.56978" />
+        <Point ID="59" X="281.8572" Y="448.7449" />
+        <Point ID="60" X="293.20296" Y="439.88568" />
+        <Point ID="61" X="340.60354" Y="404" />
+        <Point ID="62" X="312.17564" Y="425.16493" />
+        <Point ID="63" X="323.83354" Y="427.08902" />
+        <Point ID="64" X="233.72534" Y="470.40934" />
+        <Point ID="65" X="254.79124" Y="470.40934" />
+        <Point ID="66" X="260" Y="404" />
+        <Point ID="67" X="253.94025" Y="425.16493" />
+        <Point ID="68" X="240" Y="470.40934" />
+        <Point ID="69" X="241.02247" Y="467.1658" />
+        <Point ID="70" X="254" Y="470.40934" />
+        <Point ID="71" X="258.21542" Y="467.1658" />
+      </Points>
+      <Lines Len="103">
+        <Line>
+          <ID>1</ID>
+          <PointID1>1</PointID1>
+          <PointID2>2</PointID2>
+        </Line>
+        <Line>
+          <ID>2</ID>
+          <PointID1>2</PointID1>
+          <PointID2>25</PointID2>
+        </Line>
+        <Line>
+          <ID>3</ID>
+          <PointID1>25</PointID1>
+          <PointID2>3</PointID2>
+        </Line>
+        <Line>
+          <ID>4</ID>
+          <PointID1>3</PointID1>
+          <PointID2>11</PointID2>
+        </Line>
+        <Line>
+          <ID>5</ID>
+          <PointID1>11</PointID1>
+          <PointID2>10</PointID2>
+        </Line>
+        <Line>
+          <ID>6</ID>
+          <PointID1>10</PointID1>
+          <PointID2>4</PointID2>
+        </Line>
+        <Line>
+          <ID>7</ID>
+          <PointID1>4</PointID1>
+          <PointID2>1</PointID2>
+        </Line>
+        <Line>
+          <ID>8</ID>
+          <PointID1>5</PointID1>
+          <PointID2>1</PointID2>
+        </Line>
+        <Line>
+          <ID>9</ID>
+          <PointID1>9</PointID1>
+          <PointID2>36</PointID2>
+        </Line>
+        <Line>
+          <ID>10</ID>
+          <PointID1>12</PointID1>
+          <PointID2>13</PointID2>
+        </Line>
+        <Line>
+          <ID>11</ID>
+          <PointID1>13</PointID1>
+          <PointID2>14</PointID2>
+        </Line>
+        <Line>
+          <ID>12</ID>
+          <PointID1>14</PointID1>
+          <PointID2>9</PointID2>
+        </Line>
+        <Line>
+          <ID>13</ID>
+          <PointID1>15</PointID1>
+          <PointID2>16</PointID2>
+        </Line>
+        <Line>
+          <ID>14</ID>
+          <PointID1>16</PointID1>
+          <PointID2>17</PointID2>
+        </Line>
+        <Line>
+          <ID>15</ID>
+          <PointID1>17</PointID1>
+          <PointID2>13</PointID2>
+        </Line>
+        <Line>
+          <ID>16</ID>
+          <PointID1>15</PointID1>
+          <PointID2>18</PointID2>
+        </Line>
+        <Line>
+          <ID>17</ID>
+          <PointID1>18</PointID1>
+          <PointID2>17</PointID2>
+        </Line>
+        <Line>
+          <ID>18</ID>
+          <PointID1>19</PointID1>
+          <PointID2>20</PointID2>
+        </Line>
+        <Line>
+          <ID>19</ID>
+          <PointID1>20</PointID1>
+          <PointID2>21</PointID2>
+        </Line>
+        <Line>
+          <ID>20</ID>
+          <PointID1>21</PointID1>
+          <PointID2>22</PointID2>
+        </Line>
+        <Line>
+          <ID>21</ID>
+          <PointID1>22</PointID1>
+          <PointID2>23</PointID2>
+        </Line>
+        <Line>
+          <ID>22</ID>
+          <PointID1>23</PointID1>
+          <PointID2>24</PointID2>
+        </Line>
+        <Line>
+          <ID>23</ID>
+          <PointID1>24</PointID1>
+          <PointID2>19</PointID2>
+        </Line>
+        <Line>
+          <ID>24</ID>
+          <PointID1>20</PointID1>
+          <PointID2>26</PointID2>
+        </Line>
+        <Line>
+          <ID>25</ID>
+          <PointID1>26</PointID1>
+          <PointID2>27</PointID2>
+        </Line>
+        <Line>
+          <ID>26</ID>
+          <PointID1>27</PointID1>
+          <PointID2>28</PointID2>
+        </Line>
+        <Line>
+          <ID>27</ID>
+          <PointID1>28</PointID1>
+          <PointID2>30</PointID2>
+        </Line>
+        <Line>
+          <ID>28</ID>
+          <PointID1>30</PointID1>
+          <PointID2>29</PointID2>
+        </Line>
+        <Line>
+          <ID>29</ID>
+          <PointID1>29</PointID1>
+          <PointID2>18</PointID2>
+        </Line>
+        <Line>
+          <ID>30</ID>
+          <PointID1>24</PointID1>
+          <PointID2>28</PointID2>
+        </Line>
+        <Line>
+          <ID>31</ID>
+          <PointID1>30</PointID1>
+          <PointID2>31</PointID2>
+        </Line>
+        <Line>
+          <ID>32</ID>
+          <PointID1>31</PointID1>
+          <PointID2>32</PointID2>
+        </Line>
+        <Line>
+          <ID>33</ID>
+          <PointID1>32</PointID1>
+          <PointID2>29</PointID2>
+        </Line>
+        <Line>
+          <ID>34</ID>
+          <PointID1>23</PointID1>
+          <PointID2>33</PointID2>
+        </Line>
+        <Line>
+          <ID>35</ID>
+          <PointID1>33</PointID1>
+          <PointID2>34</PointID2>
+        </Line>
+        <Line>
+          <ID>36</ID>
+          <PointID1>34</PointID1>
+          <PointID2>35</PointID2>
+        </Line>
+        <Line>
+          <ID>37</ID>
+          <PointID1>36</PointID1>
+          <PointID2>37</PointID2>
+        </Line>
+        <Line>
+          <ID>38</ID>
+          <PointID1>37</PointID1>
+          <PointID2>38</PointID2>
+        </Line>
+        <Line>
+          <ID>39</ID>
+          <PointID1>40</PointID1>
+          <PointID2>38</PointID2>
+        </Line>
+        <Line>
+          <ID>40</ID>
+          <PointID1>37</PointID1>
+          <PointID2>41</PointID2>
+        </Line>
+        <Line>
+          <ID>41</ID>
+          <PointID1>40</PointID1>
+          <PointID2>41</PointID2>
+        </Line>
+        <Line>
+          <ID>42</ID>
+          <PointID1>43</PointID1>
+          <PointID2>40</PointID2>
+        </Line>
+        <Line>
+          <ID>43</ID>
+          <PointID1>41</PointID1>
+          <PointID2>44</PointID2>
+        </Line>
+        <Line>
+          <ID>44</ID>
+          <PointID1>43</PointID1>
+          <PointID2>44</PointID2>
+        </Line>
+        <Line>
+          <ID>45</ID>
+          <PointID1>44</PointID1>
+          <PointID2>45</PointID2>
+        </Line>
+        <Line>
+          <ID>46</ID>
+          <PointID1>46</PointID1>
+          <PointID2>21</PointID2>
+        </Line>
+        <Line>
+          <ID>47</ID>
+          <PointID1>3</PointID1>
+          <PointID2>15</PointID2>
+        </Line>
+        <Line>
+          <ID>48</ID>
+          <PointID1>12</PointID1>
+          <PointID2>11</PointID2>
+        </Line>
+        <Line>
+          <ID>49</ID>
+          <PointID1>25</PointID1>
+          <PointID2>47</PointID2>
+        </Line>
+        <Line>
+          <ID>50</ID>
+          <PointID1>47</PointID1>
+          <PointID2>46</PointID2>
+        </Line>
+        <Line>
+          <ID>51</ID>
+          <PointID1>42</PointID1>
+          <PointID2>6</PointID2>
+        </Line>
+        <Line>
+          <ID>52</ID>
+          <PointID1>48</PointID1>
+          <PointID2>43</PointID2>
+        </Line>
+        <Line>
+          <ID>53</ID>
+          <PointID1>38</PointID1>
+          <PointID2>49</PointID2>
+        </Line>
+        <Line>
+          <ID>54</ID>
+          <PointID1>8</PointID1>
+          <PointID2>50</PointID2>
+        </Line>
+        <Line>
+          <ID>55</ID>
+          <PointID1>50</PointID1>
+          <PointID2>51</PointID2>
+        </Line>
+        <Line>
+          <ID>56</ID>
+          <PointID1>51</PointID1>
+          <PointID2>52</PointID2>
+          <Pinned>true</Pinned>
+        </Line>
+        <Line>
+          <ID>57</ID>
+          <PointID1>6</PointID1>
+          <PointID2>53</PointID2>
+        </Line>
+        <Line>
+          <ID>58</ID>
+          <PointID1>53</PointID1>
+          <PointID2>39</PointID2>
+        </Line>
+        <Line>
+          <ID>59</ID>
+          <PointID1>53</PointID1>
+          <PointID2>55</PointID2>
+        </Line>
+        <Line>
+          <ID>60</ID>
+          <PointID1>55</PointID1>
+          <PointID2>54</PointID2>
+        </Line>
+        <Line>
+          <ID>61</ID>
+          <PointID1>35</PointID1>
+          <PointID2>52</PointID2>
+        </Line>
+        <Line>
+          <ID>62</ID>
+          <PointID1>51</PointID1>
+          <PointID2>54</PointID2>
+        </Line>
+        <Line>
+          <ID>63</ID>
+          <PointID1>48</PointID1>
+          <PointID2>56</PointID2>
+        </Line>
+        <Line>
+          <ID>64</ID>
+          <PointID1>49</PointID1>
+          <PointID2>57</PointID2>
+        </Line>
+        <Line>
+          <ID>65</ID>
+          <PointID1>42</PointID1>
+          <PointID2>58</PointID2>
+        </Line>
+        <Line>
+          <ID>66</ID>
+          <PointID1>58</PointID1>
+          <PointID2>43</PointID2>
+        </Line>
+        <Line>
+          <ID>67</ID>
+          <PointID1>56</PointID1>
+          <PointID2>58</PointID2>
+        </Line>
+        <Line>
+          <ID>68</ID>
+          <PointID1>6</PointID1>
+          <PointID2>59</PointID2>
+        </Line>
+        <Line>
+          <ID>69</ID>
+          <PointID1>59</PointID1>
+          <PointID2>40</PointID2>
+        </Line>
+        <Line>
+          <ID>70</ID>
+          <PointID1>58</PointID1>
+          <PointID2>59</PointID2>
+        </Line>
+        <Line>
+          <ID>71</ID>
+          <PointID1>38</PointID1>
+          <PointID2>60</PointID2>
+        </Line>
+        <Line>
+          <ID>72</ID>
+          <PointID1>60</PointID1>
+          <PointID2>39</PointID2>
+        </Line>
+        <Line>
+          <ID>73</ID>
+          <PointID1>59</PointID1>
+          <PointID2>60</PointID2>
+        </Line>
+        <Line>
+          <ID>74</ID>
+          <PointID1>60</PointID1>
+          <PointID2>57</PointID2>
+        </Line>
+        <Line>
+          <ID>75</ID>
+          <PointID1>42</PointID1>
+          <PointID2>7</PointID2>
+        </Line>
+        <Line>
+          <ID>76</ID>
+          <PointID1>61</PointID1>
+          <PointID2>50</PointID2>
+        </Line>
+        <Line>
+          <ID>77</ID>
+          <PointID1>8</PointID1>
+          <PointID2>62</PointID2>
+        </Line>
+        <Line>
+          <ID>78</ID>
+          <PointID1>61</PointID1>
+          <PointID2>62</PointID2>
+        </Line>
+        <Line>
+          <ID>79</ID>
+          <PointID1>62</PointID1>
+          <PointID2>57</PointID2>
+        </Line>
+        <Line>
+          <ID>80</ID>
+          <PointID1>8</PointID1>
+          <PointID2>63</PointID2>
+        </Line>
+        <Line>
+          <ID>81</ID>
+          <PointID1>63</PointID1>
+          <PointID2>39</PointID2>
+        </Line>
+        <Line>
+          <ID>82</ID>
+          <PointID1>57</PointID1>
+          <PointID2>63</PointID2>
+        </Line>
+        <Line>
+          <ID>83</ID>
+          <PointID1>45</PointID1>
+          <PointID2>64</PointID2>
+        </Line>
+        <Line>
+          <ID>84</ID>
+          <PointID1>64</PointID1>
+          <PointID2>10</PointID2>
+        </Line>
+        <Line>
+          <ID>85</ID>
+          <PointID1>4</PointID1>
+          <PointID2>65</PointID2>
+        </Line>
+        <Line>
+          <ID>86</ID>
+          <PointID1>65</PointID1>
+          <PointID2>7</PointID2>
+        </Line>
+        <Line>
+          <ID>87</ID>
+          <PointID1>55</PointID1>
+          <PointID2>5</PointID2>
+        </Line>
+        <Line>
+          <ID>88</ID>
+          <PointID1>61</PointID1>
+          <PointID2>66</PointID2>
+        </Line>
+        <Line>
+          <ID>89</ID>
+          <PointID1>66</PointID1>
+          <PointID2>14</PointID2>
+        </Line>
+        <Line>
+          <ID>90</ID>
+          <PointID1>36</PointID1>
+          <PointID2>67</PointID2>
+        </Line>
+        <Line>
+          <ID>91</ID>
+          <PointID1>67</PointID1>
+          <PointID2>62</PointID2>
+        </Line>
+        <Line>
+          <ID>92</ID>
+          <PointID1>49</PointID1>
+          <PointID2>67</PointID2>
+        </Line>
+        <Line>
+          <ID>93</ID>
+          <PointID1>67</PointID1>
+          <PointID2>66</PointID2>
+        </Line>
+        <Line>
+          <ID>94</ID>
+          <PointID1>64</PointID1>
+          <PointID2>68</PointID2>
+        </Line>
+        <Line>
+          <ID>95</ID>
+          <PointID1>69</PointID1>
+          <PointID2>45</PointID2>
+        </Line>
+        <Line>
+          <ID>96</ID>
+          <PointID1>48</PointID1>
+          <PointID2>69</PointID2>
+        </Line>
+        <Line>
+          <ID>97</ID>
+          <PointID1>69</PointID1>
+          <PointID2>68</PointID2>
+        </Line>
+        <Line>
+          <ID>98</ID>
+          <PointID1>68</PointID1>
+          <PointID2>70</PointID2>
+        </Line>
+        <Line>
+          <ID>99</ID>
+          <PointID1>70</PointID1>
+          <PointID2>65</PointID2>
+        </Line>
+        <Line>
+          <ID>100</ID>
+          <PointID1>7</PointID1>
+          <PointID2>71</PointID2>
+        </Line>
+        <Line>
+          <ID>101</ID>
+          <PointID1>71</PointID1>
+          <PointID2>69</PointID2>
+        </Line>
+        <Line>
+          <ID>102</ID>
+          <PointID1>56</PointID1>
+          <PointID2>71</PointID2>
+        </Line>
+        <Line>
+          <ID>103</ID>
+          <PointID1>71</PointID1>
+          <PointID2>70</PointID2>
+        </Line>
+      </Lines>
+      <Regions Len="33">
+        <Region>
+          <ID>1</ID>
+          <PointIDs>1,2,25,3,11,10,4</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>2</ID>
+          <PointIDs>42,58,59,6</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>3</ID>
+          <PointIDs>16,15,18,17</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>4</ID>
+          <PointIDs>19,20,21,22,23,24</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>5</ID>
+          <PointIDs>20,19,24,28,27,26</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>6</ID>
+          <PointIDs>29,30,31,32</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>7</ID>
+          <PointIDs>7,71,56,58,42</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>8</ID>
+          <PointIDs>50,8,62,61</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>9</ID>
+          <PointIDs>62,57,49,67</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>10</ID>
+          <PointIDs>38,60,59,40</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>11</ID>
+          <PointIDs>37,38,40,41</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>12</ID>
+          <PointIDs>11,3,15,16,17,13,12</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>13</ID>
+          <PointIDs>41,40,43,44</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>14</ID>
+          <PointIDs>7,65,70,71</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>15</ID>
+          <PointIDs>12,13,14,9,36,37,41,44,45,64,10,11</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>16</ID>
+          <PointIDs>46,21,20,26,27,28,30,29,18,15,3,25,47</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>17</ID>
+          <PointIDs>43,58,56,48</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>18</ID>
+          <PointIDs>5,1,4,65,7,42,6,53,55</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>19</ID>
+          <PointIDs>50,61,66,14,13,17,18,29,32,31,30,28,24,23,33,34,35,52,51</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>20</ID>
+          <PointIDs>54,55,53,39,63,8,50,51</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>21</ID>
+          <PointIDs>43,40,59,58</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>22</ID>
+          <PointIDs>39,53,6,59,60</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>23</ID>
+          <PointIDs>38,49,57,60</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>24</ID>
+          <PointIDs>36,9,14,66,67</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>25</ID>
+          <PointIDs>39,60,57,63</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>26</ID>
+          <PointIDs>62,8,63,57</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>27</ID>
+          <PointIDs>4,10,64,68,70,65</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>28</ID>
+          <PointIDs>38,37,36,67,49</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>29</ID>
+          <PointIDs>61,62,67,66</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>30</ID>
+          <PointIDs>45,44,43,48,69</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>31</ID>
+          <PointIDs>64,45,69,68</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>32</ID>
+          <PointIDs>69,48,56,71</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+        <Region>
+          <ID>33</ID>
+          <PointIDs>68,69,71,70</PointIDs>
+          <Mesh Pattern="Unstructured Mixed Elements" />
+        </Region>
+      </Regions>
+      <ResultGraphs Len="18">
+        <ResultGraph>
+          <CacheId ID="1" CacheSequenceNumber="1" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Factor of Safety vs. Lambda</Name>
+          <SourceType>SlopeConvergence</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>ViewSlipFOS</Y>
+          <X>Lambda</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="2" CacheSequenceNumber="5" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Title>Factor of Safety vs. Time</Title>
+            <XTitle>时间 (秒)</XTitle>
+            <YTitle>安全系数</YTitle>
+            <Legend>gsw::eFALSE</Legend>
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Factor of Safety vs. Time</Name>
+          <SourceType>SlopeSlipSurface</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>ViewSlipFOS</Y>
+          <X>Time</X>
+          <IndepUnit>2147483646</IndepUnit>
+          <SlipFilter>2147483646</SlipFilter>
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="3" CacheSequenceNumber="3" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Velocity vs. Time</Name>
+          <SourceType>SlopeSlipSurface</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>Velocity</Y>
+          <X>Time</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="4" CacheSequenceNumber="4" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Deformation vs. Time</Name>
+          <SourceType>SlopeSlipSurface</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>Deformation</Y>
+          <X>Time</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="5" CacheSequenceNumber="5" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Average Acceleration vs. Time</Name>
+          <SourceType>SlopeSlipSurface</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>AverageAcceleration</Y>
+          <X>Time</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="6" CacheSequenceNumber="6" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Factor of Safety vs. Average Acceleration</Name>
+          <SourceType>SlopeSlipSurface</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>ViewSlipFOS</Y>
+          <X>AverageAcceleration</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="7" CacheSequenceNumber="7" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>X-Conductivity vs. Matric Suction</Name>
+          <SourceType>ConvergenceStep</SourceType>
+          <TimeSelection>Last</TimeSelection>
+          <Y>WaterConductivityX</Y>
+          <X>MatricSuction</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="8" CacheSequenceNumber="8" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <YLog>gsw::eFALSE</YLog>
+            <Rotate90>gsw::eFALSE</Rotate90>
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Displacement Error vs. Iteration</Name>
+          <SourceType>ConvergenceIteration</SourceType>
+          <TimeSelection>Last</TimeSelection>
+          <Y>RelativeDisplacementError</Y>
+          <X>Iteration</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="9" CacheSequenceNumber="9" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <YLog>gsw::eFALSE</YLog>
+            <Rotate90>gsw::eFALSE</Rotate90>
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Residual Force Error vs. Iteration</Name>
+          <SourceType>ConvergenceIteration</SourceType>
+          <TimeSelection>Last</TimeSelection>
+          <Y>RelativeResidualForceError</Y>
+          <X>Iteration</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="10" CacheSequenceNumber="10" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <YLog>gsw::eFALSE</YLog>
+            <Rotate90>gsw::eFALSE</Rotate90>
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Unbalanced Energy Error vs. Iteration</Name>
+          <SourceType>ConvergenceIteration</SourceType>
+          <TimeSelection>Last</TimeSelection>
+          <Y>RelativeUnbalancedEnergyError</Y>
+          <X>Iteration</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="11" CacheSequenceNumber="11" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Displacement Error vs. Strength Reduction Factor</Name>
+          <SourceType>ConvergencePartialMaterialFactor</SourceType>
+          <Y>RelativeDisplacementError</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="12" CacheSequenceNumber="12" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Residual Force Error vs. Strength Reduction Factor</Name>
+          <SourceType>ConvergencePartialMaterialFactor</SourceType>
+          <Y>RelativeResidualForceError</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="13" CacheSequenceNumber="13" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Relative Unbalanced Energy Error vs. Strength Reduction Factor</Name>
+          <SourceType>ConvergencePartialMaterialFactor</SourceType>
+          <Y>RelativeUnbalancedEnergyError</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="14" CacheSequenceNumber="14" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>||U|| vs. Strength Reduction Factor</Name>
+          <SourceType>StressRedistribution</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>VectorNormDisplacements</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="15" CacheSequenceNumber="15" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Residual Error vs. Strength Reduction Factor</Name>
+          <SourceType>StressRedistribution</SourceType>
+          <Y>RelativeResidualForceError</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="16" CacheSequenceNumber="16" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>Stress Iteration Count vs. Strength Reduction Factor</Name>
+          <SourceType>ConvergencePartialMaterialFactor</SourceType>
+          <Y>StressIterationCount</Y>
+          <X>PartialMaterialFactor</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="17" CacheSequenceNumber="4" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Title>新建图表 (2)</Title>
+            <XTitle>时间 (秒)</XTitle>
+            <YTitle>迭代次数</YTitle>
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>新建图表 (2)</Name>
+          <SourceType>Mesh</SourceType>
+          <TimeSelection>All</TimeSelection>
+          <Y>XTotalStress</Y>
+          <X>X</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+        <ResultGraph>
+          <CacheId ID="18" CacheSequenceNumber="2" />
+          <GraphOptions>
+            <Font Height="-16" OutPrecision="1" ClipPrecision="2" Quality="1" PitchAndFamily="26" FaceName="Arial" />
+            <Symbols>true</Symbols>
+          </GraphOptions>
+          <Name>新建图表</Name>
+          <SourceType>Mesh</SourceType>
+          <Y>TotalHead</Y>
+          <X>Distance</X>
+          <IndepUnit Missing="true" />
+        </ResultGraph>
+      </ResultGraphs>
+      <Locations Len="1">
+        <Location>
+          <ID>1</ID>
+          <Name>新位置</Name>
+          <LocationKind>Geometry</LocationKind>
+          <LocationFlags>Hidden</LocationFlags>
+        </Location>
+      </Locations>
+      <UsesLocations Len="1">
+        <UsesLocation ID="ResultGraphs-17" Entry="1" />
+      </UsesLocations>
+      <Window>
+        <Base X="-892" Y="-2694" />
+        <Zoom>0.15552000000000119</Zoom>
+      </Window>
+      <SketchItems>
+        <Images Len="1">
+          <Image>
+            <FileName>OBJECT</FileName>
+          </Image>
+        </Images>
+        <AxisOptions BottomAxisTitle="距离" LeftAxisTitle="高程" TopAxisTitle="距离" RightAxisTitle="高程" />
+      </SketchItems>
+      <PointLabel Len="35">
+        <Point ID="37" Value="1" />
+        <Point ID="38" Value="1" />
+        <Point ID="39" Value="1" />
+        <Point ID="40" Value="1" />
+        <Point ID="41" Value="1" />
+        <Point ID="42" Value="1" />
+        <Point ID="43" Value="1" />
+        <Point ID="44" Value="1" />
+        <Point ID="45" Value="1" />
+        <Point ID="46" Value="1" />
+        <Point ID="47" Value="1" />
+        <Point ID="48" Value="1" />
+        <Point ID="49" Value="1" />
+        <Point ID="50" Value="1" />
+        <Point ID="51" Value="1" />
+        <Point ID="52" Value="1" />
+        <Point ID="53" Value="1" />
+        <Point ID="54" Value="1" />
+        <Point ID="55" Value="1" />
+        <Point ID="56" Value="1" />
+        <Point ID="57" Value="1" />
+        <Point ID="58" Value="1" />
+        <Point ID="59" Value="1" />
+        <Point ID="60" Value="1" />
+        <Point ID="61" Value="1" />
+        <Point ID="62" Value="1" />
+        <Point ID="63" Value="1" />
+        <Point ID="64" Value="1" />
+        <Point ID="65" Value="1" />
+        <Point ID="66" Value="1" />
+        <Point ID="67" Value="1" />
+        <Point ID="68" Value="1" />
+        <Point ID="69" Value="1" />
+        <Point ID="70" Value="1" />
+        <Point ID="71" Value="1" />
+      </PointLabel>
+      <Precision>5,5,7</Precision>
+      <Transformation>1,-0,0,-233.4,-0,1,-0,0,0,-0,1,-0,-0,0,-0,1</Transformation>
+      <SourceId Missing="true" />
+    </Geometry>
+  </Geometries>
+  <Materials Len="13">
+    <Material>
+      <ID>1</ID>
+      <Color>RGB=(255,255,128)</Color>
+      <Name>面板</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>MohrCoulomb</SlopeModel>
+      <StressModel>LinearElastic</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>24.5</UnitWeight>
+        <CohesionPrime>1800</CohesionPrime>
+        <PhiPrime>44</PhiPrime>
+        <YoungsPrimeModulus>3e+07</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.167</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.005</InitVoidRatio>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="1e-07" />
+    </Material>
+    <Material>
+      <ID>2</ID>
+      <Color>RGB=(191,255,128)</Color>
+      <Name>垫层</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>ShearNormalFn</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <StrengthFnNum>3</StrengthFnNum>
+        <UnitWeight>22.5</UnitWeight>
+        <PhiPrime>48</PhiPrime>
+        <YoungsPrimeModulus>180000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.2</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.85</Rf>
+        <Kur>1.61</Kur>
+        <DilationAngle>6</DilationAngle>
+        <InitVoidRatio>0.18</InitVoidRatio>
+        <EurReference>540000</EurReference>
+        <E50Reference>180000</E50Reference>
+        <EoedReference>150000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="3.19e-05" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>3</ID>
+      <Color>RGB=(128,255,128)</Color>
+      <Name>过渡</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>ShearNormalFn</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <StrengthFnNum>4</StrengthFnNum>
+        <UnitWeight>21.07</UnitWeight>
+        <PhiPrime>45</PhiPrime>
+        <YoungsPrimeModulus>140000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.85</Rf>
+        <Kur>1.78</Kur>
+        <DilationAngle>7</DilationAngle>
+        <InitVoidRatio>0.2</InitVoidRatio>
+        <EurReference>500000</EurReference>
+        <E50Reference>165000</E50Reference>
+        <EoedReference>135000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.000641" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>4</ID>
+      <Color>RGB=(128,255,191)</Color>
+      <Name>主堆石区</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>ShearNormalFn</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <SigmaEffectiveStiffnessModel>Function</SigmaEffectiveStiffnessModel>
+        <StrengthFnNum>1</StrengthFnNum>
+        <UnitWeight>21.5</UnitWeight>
+        <PhiPrime>45</PhiPrime>
+        <YoungsPrimeModulus>180000</YoungsPrimeModulus>
+        <K0nc>0.33086939364114176</K0nc>
+        <EffectivePoissonsRatio>0.2</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.83</Rf>
+        <Kur>1.81</Kur>
+        <DilationAngle>8</DilationAngle>
+        <InitVoidRatio>0.22</InitVoidRatio>
+        <EurReference>450000</EurReference>
+        <E50Reference>150000</E50Reference>
+        <EoedReference>120000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0706" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>5</ID>
+      <Color>RGB=(128,255,255)</Color>
+      <Name>次堆石区</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>ShearNormalFn</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <MExponent>0.55</MExponent>
+        <StrengthFnNum>2</StrengthFnNum>
+        <UnitWeight>19.84</UnitWeight>
+        <PhiPrime>38</PhiPrime>
+        <YoungsPrimeModulus>130000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.8</Rf>
+        <Kur>2.03</Kur>
+        <InitVoidRatio>0.25</InitVoidRatio>
+        <EurReference>180000</EurReference>
+        <E50Reference>60000</E50Reference>
+        <EoedReference>50000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0156" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>6</ID>
+      <Color>RGB=(128,191,255)</Color>
+      <Name>排水</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>MohrCoulomb</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <MExponent>0.45</MExponent>
+        <UnitWeight>20.1</UnitWeight>
+        <PhiPrime>44</PhiPrime>
+        <YoungsPrimeModulus>151500</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.2</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.85</Rf>
+        <Kur>1.81</Kur>
+        <DilationAngle>6</DilationAngle>
+        <InitVoidRatio>0.26</InitVoidRatio>
+        <EurReference>480000</EurReference>
+        <E50Reference>160000</E50Reference>
+        <EoedReference>130000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0706" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>7</ID>
+      <Color>RGB=(191,128,255)</Color>
+      <Name>压坡</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>ShearNormalFn</SlopeModel>
+      <StressModel>MohrCoulomb</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <MExponent>0.55</MExponent>
+        <StrengthFnNum>5</StrengthFnNum>
+        <UnitWeight>19.012</UnitWeight>
+        <CohesionPrime>5</CohesionPrime>
+        <PhiPrime>38</PhiPrime>
+        <YoungsPrimeModulus>100000</YoungsPrimeModulus>
+        <InsituKo>0.3439409710094927</InsituKo>
+        <EffectivePoissonsRatio>0.3</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.85</Rf>
+        <Kur>1.79</Kur>
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.26</InitVoidRatio>
+        <EurReference>180000</EurReference>
+        <E50Reference>60000</E50Reference>
+        <EoedReference>50000</EoedReference>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0789" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>8</ID>
+      <Color>RGB=(255,128,191)</Color>
+      <Name>帷幕</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>MohrCoulomb</SlopeModel>
+      <StressModel>LinearElastic</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>24</UnitWeight>
+        <CohesionPrime>100</CohesionPrime>
+        <PhiPrime>20</PhiPrime>
+        <YoungsPrimeModulus>2.8e+07</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.167</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.005</InitVoidRatio>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="1e-05" />
+    </Material>
+    <Material>
+      <ID>9</ID>
+      <Color>RGB=(255,128,128)</Color>
+      <Name>地基</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>Bedrock</SlopeModel>
+      <StressModel>LinearElastic</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>24</UnitWeight>
+        <CohesionPrime>1000</CohesionPrime>
+        <PhiPrime>20</PhiPrime>
+        <YoungsPrimeModulus>1.2e+07</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.79</Rf>
+        <Kur>1.81</Kur>
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.01</InitVoidRatio>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0008" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>10</ID>
+      <Color>RGB=(255,191,128)</Color>
+      <Name>全强风化</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>MohrCoulomb</SlopeModel>
+      <StressModel>MohrCoulomb</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>19.012</UnitWeight>
+        <PhiPrime>48</PhiPrime>
+        <YoungsPrimeModulus>150000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.15</InitVoidRatio>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0001388888888888889" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>11</ID>
+      <Color>RGB=(255,255,128)</Color>
+      <Name>全风化</Name>
+      <QuakeModel>LinearElastic</QuakeModel>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>MohrCoulomb</SlopeModel>
+      <StressModel>MohrCoulomb</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>19.012</UnitWeight>
+        <PhiPrime>41</PhiPrime>
+        <YoungsPrimeModulus>70000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.25</InitVoidRatio>
+        <DynDampingRatio>0.1</DynDampingRatio>
+        <Gmax>40000</Gmax>
+      </StressStrain>
+      <Hydraulic KSat="0.0001736111111111111" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>12</ID>
+      <Color>RGB=(128,87,255)</Color>
+      <Name>坝体增模区</Name>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>None</SlopeModel>
+      <StressModel>HardeningSoil</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <IntactRockParam Missing="true" />
+        <GeologicalStrengthIndex Missing="true" />
+        <DisturbanceFactor Missing="true" />
+        <MaxConfiningStress Missing="true" />
+        <UnitWeight>23.8</UnitWeight>
+        <PhiPrime>45</PhiPrime>
+        <YoungsPrimeModulus>240000</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.22</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <Rf>0.63</Rf>
+        <Kur>1.81</Kur>
+        <DilationAngle>8</DilationAngle>
+        <InitVoidRatio>0.22</InitVoidRatio>
+        <EurReference>660000</EurReference>
+        <E50Reference>220000</E50Reference>
+        <EoedReference>180000</EoedReference>
+      </StressStrain>
+      <Hydraulic KSat="0.07060185185185185" UseInitPWP="true" />
+    </Material>
+    <Material>
+      <ID>13</ID>
+      <Color>RGB=(128,255,128)</Color>
+      <Name>坝顶</Name>
+      <SeepModel>SatOnly</SeepModel>
+      <SlopeModel>None</SlopeModel>
+      <StressModel>LinearElastic</StressModel>
+      <StressStrain>
+        <JointEffectiveCohesion Missing="true" />
+        <MaxConfiningStress>1000</MaxConfiningStress>
+        <IsHoekBrownDerivedCalc>true</IsHoekBrownDerivedCalc>
+        <UnitWeight>24.5</UnitWeight>
+        <YoungsPrimeModulus>3e+07</YoungsPrimeModulus>
+        <EffectivePoissonsRatio>0.167</EffectivePoissonsRatio>
+        <EPrimeModulusXPrime Missing="true" />
+        <EffectivePoissonsRatioXPrime Missing="true" />
+        <EPrimeModulusYPrime Missing="true" />
+        <EffectivePoissonsRatioYPrime Missing="true" />
+        <ShearModulusXYPrime Missing="true" />
+        <OCRatio Missing="true" />
+        <InitVoidRatio>0.005</InitVoidRatio>
+      </StressStrain>
+      <Hydraulic KSat="1e-07" />
+    </Material>
+  </Materials>
+  <StressItems Len="10">
+    <StressItem>
+      <AnalysisID>1</AnalysisID>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>2</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;施工前初始地应力&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>3</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第一层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>4</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第二层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>5</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第三层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>6</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第四层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>7</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第五层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>8</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第六层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>9</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;上游面板浇筑&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+    <StressItem>
+      <AnalysisID>10</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;浇筑完成&quot;;(last)" />
+        </InitialInputInfo>
+      </Entry>
+    </StressItem>
+  </StressItems>
+  <View>
+    <PreferencesTable Len="3">
+      <Preferences>
+        <ShowGrid>true</ShowGrid>
+        <SnapToGrid>true</SnapToGrid>
+        <RightRuler>true</RightRuler>
+        <TopRuler>true</TopRuler>
+        <RegionNumbers>false</RegionNumbers>
+        <RegionLabelOption>Number</RegionLabelOption>
+        <Mesh>true</Mesh>
+        <CtranBC>Contamination</CtranBC>
+        <SlopeBC Missing="true" />
+        <TempBC>Thermal</TempBC>
+        <PondingColor>RGB=(200,240,255)</PondingColor>
+        <ViewImperviousBarriers>false</ViewImperviousBarriers>
+        <ContourShading>true</ContourShading>
+      </Preferences>
+      <Preferences>
+        <UserSelection>
+          <CurrentSlip>1</CurrentSlip>
+          <SelectedTransientContours Len="1">
+            <SelectedTransientContour>2</SelectedTransientContour>
+          </SelectedTransientContours>
+          <SelectedContours Len="6">
+            <SelectedContour>1</SelectedContour>
+            <SelectedContour>14</SelectedContour>
+            <SelectedContour>12</SelectedContour>
+            <SelectedContour>13</SelectedContour>
+            <SelectedContour>7</SelectedContour>
+            <SelectedContour>2</SelectedContour>
+          </SelectedContours>
+        </UserSelection>
+        <RightRuler>true</RightRuler>
+        <TopRuler>true</TopRuler>
+        <Points>false</Points>
+        <Regions>false</Regions>
+        <PointNumbers>false</PointNumbers>
+        <RegionNumbers>false</RegionNumbers>
+        <RegionLabelOption>Number</RegionLabelOption>
+        <GroundSurfaceLine>false</GroundSurfaceLine>
+        <Mesh>true</Mesh>
+        <MaterialColor>false</MaterialColor>
+        <MaterialBoundary>true</MaterialBoundary>
+        <CtranBC>Contamination</CtranBC>
+        <QuakeBC>Displacement</QuakeBC>
+        <SeepBC>Hydraulic</SeepBC>
+        <SlopeBC Missing="true" />
+        <TempBC>Thermal</TempBC>
+        <PWP>false</PWP>
+        <SlipSurfaceColor>RGB=(0,255,0)</SlipSurfaceColor>
+        <PondingColor>RGB=(200,240,255)</PondingColor>
+        <InitialConditions>false</InitialConditions>
+        <InitialWaterTable>false</InitialWaterTable>
+        <CoverDetail>false</CoverDetail>
+        <BodyLoad>false</BodyLoad>
+        <ContourShading>true</ContourShading>
+        <FlowPath>false</FlowPath>
+      </Preferences>
+      <Preferences>
+        <ShowGrid>true</ShowGrid>
+        <SnapToGrid>true</SnapToGrid>
+        <RightRuler>true</RightRuler>
+        <TopRuler>true</TopRuler>
+        <GroundSurfaceLine>false</GroundSurfaceLine>
+        <MaterialBoundary>true</MaterialBoundary>
+        <NodeConvergence>true</NodeConvergence>
+        <SketchItems>false</SketchItems>
+        <Pictures>false</Pictures>
+        <Axis>false</Axis>
+        <SlopeBC Missing="true" />
+        <PWP>false</PWP>
+        <SlipSurfaces>false</SlipSurfaces>
+        <CurrentSlipSurface>false</CurrentSlipSurface>
+        <LineLoads>false</LineLoads>
+        <Reinforcement>false</Reinforcement>
+        <ReinforcementLabel>false</ReinforcementLabel>
+        <ReinforcementArrow>false</ReinforcementArrow>
+        <PressureLines>false</PressureLines>
+        <PressureLineShading>false</PressureLineShading>
+        <TensionCrackLine>false</TensionCrackLine>
+        <TensionCrackShading>false</TensionCrackShading>
+        <SlipSurfaceShading>false</SlipSurfaceShading>
+        <SlipSurfaceSlices>false</SlipSurfaceSlices>
+        <SlipSurfaceColor>RGB=(0,255,0)</SlipSurfaceColor>
+        <CriticalSlipLine>false</CriticalSlipLine>
+        <FOSContours>false</FOSContours>
+        <FOSContourShading>false</FOSContourShading>
+        <WaterSurchargeLoad>false</WaterSurchargeLoad>
+        <PondingColor>RGB=(200,240,255)</PondingColor>
+        <Particles>false</Particles>
+        <InitialConditions>false</InitialConditions>
+        <BoundaryConditions>false</BoundaryConditions>
+        <InitialWaterTable>false</InitialWaterTable>
+        <CoverDetail>false</CoverDetail>
+        <ViewImperviousBarriers>false</ViewImperviousBarriers>
+        <BodyLoad>false</BodyLoad>
+        <StructuralElements>false</StructuralElements>
+        <TrussElements>false</TrussElements>
+        <HistoryPoints>false</HistoryPoints>
+        <Vectors>false</Vectors>
+        <Contours>false</Contours>
+        <TransientContours>false</TransientContours>
+        <FlowPath>false</FlowPath>
+        <Deformation>false</Deformation>
+      </Preferences>
+    </PreferencesTable>
+    <Vectors Len="7">
+      <Vector VectorType="WaterFlux" Visible="false" Magnification="3441.395433664674" Length="170" />
+      <Vector VectorType="XYDisplacement" Visible="false" Magnification="112.86154627423933" Color="RGB=(255,0,0)" Length="170" />
+      <Vector VectorType="XYVelocity" Visible="false" Magnification="253.0456899151386" Length="170" />
+      <Vector VectorType="XYAcceleration" Visible="false" Magnification="942.143847105529" Color="RGB=(0,128,192)" Length="170" />
+      <Vector VectorType="RelXYDisplacement" Visible="false" Magnification="269.9698783641049" Color="RGB=(255,0,0)" Length="170" />
+      <Vector VectorType="RelXYVelocity" Visible="false" Magnification="255.1544630733613" Length="170" />
+      <Vector VectorType="RelXYAcceleration" Visible="false" Magnification="942.143847105529" Color="RGB=(0,128,192)" Length="170" />
+    </Vectors>
+    <PlasticStatesDefinitions Len="1">
+      <PlasticStatesDefinition Param="FailureSurface" />
+    </PlasticStatesDefinitions>
+    <TransientContours Len="3">
+      <TransientContour>
+        <Name>New Isoline</Name>
+      </TransientContour>
+      <TransientContour>
+        <Name>压力水头</Name>
+        <ContourType>PressureHead</ContourType>
+      </TransientContour>
+      <TransientContour>
+        <Name>最大剪应力</Name>
+        <ContourType>MaxShearStress</ContourType>
+        <Color>RGB=(255,0,0)</Color>
+      </TransientContour>
+    </TransientContours>
+    <Contours Len="14">
+      <Contour>
+        <Name>Y-Total Stress</Name>
+        <Type>YDisplacement</Type>
+        <MinLevel>-0.28</MinLevel>
+        <LevelIncrement>0.020000000000000004</LevelIncrement>
+        <NumOfLines>15</NumOfLines>
+        <StartColor>RGB=(255,128,128)</StartColor>
+        <EndColor>RGB=(0,255,255)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Water Total Head</Name>
+        <Type>TotalHead</Type>
+        <MinLevel>447.9999999998104</MinLevel>
+        <LevelIncrement>0.5</LevelIncrement>
+        <NumOfLines>3</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Phi</Name>
+        <Type>PhiPrime</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Cohesion</Name>
+        <Type>CohesionPrime</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Unit Weight</Name>
+        <Type>UnitWeight</Type>
+        <MinLevel>19</MinLevel>
+        <LevelIncrement>0.5</LevelIncrement>
+        <NumOfLines>11</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Pore-Water Pressure</Name>
+        <Type>PoreWaterPressure</Type>
+        <MinLevel>-400</MinLevel>
+        <LevelIncrement>200</LevelIncrement>
+        <NumOfLines>12</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Pressure Head</Name>
+        <Type>PressureHead</Type>
+        <MinLevel>-80</MinLevel>
+        <LevelIncrement>20</LevelIncrement>
+        <NumOfLines>14</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Temperature</Name>
+        <Type>Temperature</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Concentration</Name>
+        <Type>Concentration</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Gas Concentration</Name>
+        <Type>GasConcentration</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>Air Pressure</Name>
+        <Type>AirPressure</Type>
+        <MinLevel Missing="true" />
+        <LevelIncrement Missing="true" />
+        <NumOfLines Missing="true" />
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+      </Contour>
+      <Contour>
+        <Name>y位移</Name>
+        <Type>YPeakDisplacement</Type>
+        <MinLevel>0</MinLevel>
+        <LevelIncrement>0.02</LevelIncrement>
+        <NumOfLines>14</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+        <ExtendColors>true</ExtendColors>
+      </Contour>
+      <Contour>
+        <Name>水平位移</Name>
+        <Type>XPeakDisplacement</Type>
+        <MinLevel>0.45</MinLevel>
+        <LevelIncrement>0.05</LevelIncrement>
+        <NumOfLines>17</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+        <ExtendColors>true</ExtendColors>
+      </Contour>
+      <Contour>
+        <Name>加速度</Name>
+        <Type>XPeakAcceleration</Type>
+        <MinLevel>0.15</MinLevel>
+        <LevelIncrement>0.05</LevelIncrement>
+        <NumOfLines>10</NumOfLines>
+        <StartColor>RGB=(128,192,255)</StartColor>
+        <EndColor>RGB=(255,128,128)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <AutoContour>true</AutoContour>
+        <ExtendColors>true</ExtendColors>
+      </Contour>
+    </Contours>
+    <SlipContours Len="1">
+      <SlipContour>
+        <Type>ViewSlipFOS</Type>
+        <MinLevel>1</MinLevel>
+        <LevelIncrement>0.1</LevelIncrement>
+        <NumOfLines>11</NumOfLines>
+        <StartColor>RGB=(255,0,0)</StartColor>
+        <EndColor>RGB=(0,0,255)</EndColor>
+        <ShadingMethod>WideRainbow</ShadingMethod>
+        <ShadesPerInterval>1</ShadesPerInterval>
+        <ExtendColors>true</ExtendColors>
+        <MinValueOption>UseMin</MinValueOption>
+      </SlipContour>
+    </SlipContours>
+    <VisibleUnitSets>
+      <VisibleUnitsByUnitKind Len="2">
+        <VisibleUnitsByUnitKind_>
+          <UnitKind>Time</UnitKind>
+          <Units Time="Seconds" />
+        </VisibleUnitsByUnitKind_>
+        <VisibleUnitsByUnitKind_>
+          <UnitKind>Concentration</UnitKind>
+          <Units Mass="g" />
+        </VisibleUnitsByUnitKind_>
+      </VisibleUnitsByUnitKind>
+      <VisibleBaseUnits Time="Days" Mass="kg" />
+    </VisibleUnitSets>
+    <Font>
+      <FontInfo FaceName="Arial" />
+      <NodeNumberSize>6</NodeNumberSize>
+      <ElementNumberSize>6</ElementNumberSize>
+      <AxisSize>10</AxisSize>
+      <FactorOfSafetySize>400</FactorOfSafetySize>
+      <PointNumberSize>10</PointNumberSize>
+      <RegionNumberSize>12</RegionNumberSize>
+      <ReinfLoadNumberSize>6</ReinfLoadNumberSize>
+    </Font>
+    <Legends>
+      <ContourLegendDef>
+        <FontSize>100</FontSize>
+        <TitleFontSize>100</TitleFontSize>
+        <Position X="491.0321700000001" Y="561.7583000000004" />
+        <Shown>true</Shown>
+      </ContourLegendDef>
+      <FOSContourLegendDef>
+        <FontSize>10</FontSize>
+        <TitleFontSize>10</TitleFontSize>
+      </FOSContourLegendDef>
+      <MaterialLegendDef>
+        <FontSize>10</FontSize>
+        <TitleFontSize>10</TitleFontSize>
+      </MaterialLegendDef>
+      <ColumnContourLegendDef>
+        <FontSize>10</FontSize>
+        <TitleFontSize>10</TitleFontSize>
+      </ColumnContourLegendDef>
+    </Legends>
+    <ContourTime Analysis="正常蓄水位应力分布" Step="3" ElapsedTime="9" />
+    <AnalysisLastViewed>正常蓄水位应力分布</AnalysisLastViewed>
+    <ViewMode>Define</ViewMode>
+  </View>
+  <WaterItems Len="10">
+    <WaterItem>
+      <AnalysisID>1</AnalysisID>
+      <Entry>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>2</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;施工前初始地应力&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>3</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第一层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>4</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第二层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>5</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第三层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>6</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第四层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>7</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第五层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>8</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;第六层浇筑应力分布&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>9</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;上游面板浇筑&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+    <WaterItem>
+      <AnalysisID>10</AnalysisID>
+      <Entry>
+        <InitialInputInfo>
+          <Option>Parent</Option>
+          <Path path=";;&quot;浇筑完成&quot;;(last)" />
+        </InitialInputInfo>
+        <UnitWaterWeight>9.807</UnitWaterWeight>
+        <WaterBulkMod>2.08333333e+06</WaterBulkMod>
+      </Entry>
+    </WaterItem>
+  </WaterItems>
+</GSIData>
