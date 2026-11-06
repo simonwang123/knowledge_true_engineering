@@ -156,6 +156,42 @@ def derivative_posterior(response: kg.ResponseModel, points, dims):
     return cross.T @ model.alpha_, prior - solved.T @ solved, cross, prior
 
 
+def _derivative_cross(points, dims, sites, site_dims, amplitude, lengths):
+    """Covariance between two sets of Matern-5/2 partial derivatives."""
+    points, sites = np.asarray(points), np.asarray(sites)
+    dims, site_dims = np.asarray(dims, dtype=int), np.asarray(site_dims, dtype=int)
+    lengths = np.broadcast_to(np.asarray(lengths, dtype=float), (points.shape[1],))
+    delta = points[:, None, :] - sites[None, :, :]
+    r = np.sqrt(np.sum((delta / lengths) ** 2, axis=2))
+    exponential = np.exp(-np.sqrt(5) * r)
+    row = np.take_along_axis(delta, dims[:, None, None], axis=2)[:, :, 0]
+    col = np.take_along_axis(delta, site_dims[None, :, None], axis=2)[:, :, 0]
+    return (
+        amplitude * (5 / 3) * (1 + np.sqrt(5) * r) * exponential
+        * (dims[:, None] == site_dims[None, :]) / lengths[dims][:, None] ** 2
+        - amplitude * (25 / 3) * exponential * row * col
+        / (lengths[dims][:, None] ** 2 * lengths[site_dims][None, :] ** 2)
+    )
+
+
+def derivative_marginals(response: kg.ResponseModel, points, dims):
+    """Data-only derivative means and marginal variances without a dense candidate matrix."""
+    model = response.model
+    amplitude, lengths = _kernel_parameters(response)
+    points, dims = np.asarray(points), np.asarray(dims, dtype=int)
+    lengths = np.broadcast_to(np.asarray(lengths, dtype=float), (points.shape[1],))
+    delta = model.X_train_[:, None, :] - points[None, :, :]
+    r = np.sqrt(np.sum((delta / lengths) ** 2, axis=2))
+    coordinate = np.take_along_axis(delta, dims[None, :, None], axis=2)[:, :, 0]
+    cross = (
+        amplitude * (5 / 3) * (1 + np.sqrt(5) * r)
+        * np.exp(-np.sqrt(5) * r) * coordinate / lengths[dims] ** 2
+    )
+    solved = solve_triangular(model.L_, cross, lower=True)
+    variance = amplitude * (5 / 3) / lengths[np.asarray(dims, dtype=int)] ** 2
+    return cross.T @ model.alpha_, np.maximum(variance - np.sum(solved**2, axis=0), 0), cross
+
+
 def _cholesky(matrix: np.ndarray) -> np.ndarray:
     matrix = (matrix + matrix.T) / 2
     for jitter in (1e-12, 1e-10, 1e-8, 1e-6):
@@ -253,23 +289,66 @@ class SignConstrainedGP:
             self.response.standard_deviation * np.sqrt(np.maximum(variance, 0)),
         )
 
+    def derivative_marginals(self, points, dims):
+        """Derivative posterior after the currently selected soft sign observations."""
+        mean, variance, cross = derivative_marginals(self.response, points, dims)
+        if not self.active:
+            return mean, variance
+        amplitude, lengths = _kernel_parameters(self.response)
+        prior = _derivative_cross(
+            points, dims, self.points, self.dims, amplitude, lengths
+        ) / self.scale
+        covariance = prior - cross.T @ cho_solve(
+            (self.response.model.L_, True), self.training_cross
+        )
+        b = solve_triangular(self.factor, covariance.T, lower=True).T
+        corrected = solve_triangular(self.hessian_factor, b.T, lower=True)
+        variance = variance - np.sum(b**2, axis=1) + np.sum(corrected**2, axis=0)
+        if not np.isfinite(variance).all() or np.min(variance) < -1e-7:
+            raise ValueError("invalid guided derivative variance")
+        return mean + b @ self.mode, np.maximum(variance, 0)
+
 
 def select_virtual_derivatives(
     x,
-    y,
-    design_ids,
+    candidates,
     models,
     weights,
     enabled,
     constraints: dict[str, Constraint],
     *,
+    acquisition_relevant,
+    softness: float = 0.1,
     maximum: int = 20,
+    minimum_probability: float = 0.1,
+    maximum_probability: float = 0.5,
     conflict_probability: float = 0.8,
+    boundary_std: float = 2.0,
+    minimum_distance: float = 0.15,
+    support_factor: float = 1.5,
     response_fields: Sequence[str] = METRIC_FIELDS,
 ):
-    """Select up to two active variables independently for each violated response."""
+    """Greedily place signs where the current derivative posterior is informative.
+
+    Eligibility and relevance use only the real-data GPs. After each placement the
+    derivative probabilities are updated with the guided posterior. Conflicting
+    locations are audited, not coerced into the prior direction.
+    """
+    x, candidates = np.asarray(x), np.asarray(candidates)
+    acquisition_relevant = np.asarray(acquisition_relevant, dtype=bool)
+    if candidates.ndim != 2 or candidates.shape[1] != x.shape[1]:
+        raise ValueError("candidate points must match the observed design dimension")
+    if acquisition_relevant.shape != (len(candidates),):
+        raise ValueError("acquisition relevance must match the candidate count")
     selected: list[list[dict]] = [[] for _ in response_fields]
     audit = []
+    # Compare candidate coverage with the observed design's own nearest-neighbour
+    # spacing. This excludes extrapolation without assuming a fixed 8-D radius.
+    distances = np.linalg.norm(candidates[:, None, :] - x[None, :, :], axis=2)
+    observed_distances = np.linalg.norm(x[:, None, :] - x[None, :, :], axis=2)
+    np.fill_diagonal(observed_distances, np.inf)
+    support_radius = support_factor * float(np.quantile(np.min(observed_distances, axis=1), 0.9))
+    supported = np.min(distances, axis=1) <= support_radius
     for j, name in enumerate(response_fields):
         if not enabled[j] or models[j].model is None:
             continue
@@ -279,54 +358,90 @@ def select_virtual_derivatives(
         )[:2]
         if not variables:
             continue
-        scale = max(models[j].standard_deviation, 1e-12)
-        residuals = constraints[name].residual(y[:, j]) / scale
-        rows = sorted(
-            (i for i in range(len(x)) if residuals[i] > 0),
-            key=lambda i: (-residuals[i], design_ids[i]),
-        )
-        seen = set()
-        for row in rows:
-            for variable in variables:
-                key = (tuple(x[row]), variable)
-                if key in seen:
-                    continue
-                seen.add(key)
-                sign = kg.PRIOR_SIGN[variable][j]
-                observation = {
-                    "design_id": design_ids[row],
-                    "response": name,
-                    "response_index": j,
-                    "variable": kg.DESIGN_VARS[variable],
-                    "variable_index": variable,
-                    "point": x[row].tolist(),
-                    "sign": sign,
-                    "weight": float(weights[variable][j]),
-                    "standardized_violation": float(residuals[row]),
-                }
-                try:
-                    mean, cov, _, _ = derivative_posterior(
-                        models[j], x[row : row + 1], [variable]
-                    )
-                    std = np.sqrt(max(float(cov[0, 0]), 0))
-                    opposite = (
-                        float(ndtr(-sign * mean[0] / std))
-                        if std > 1e-12
-                        else float(sign * mean[0] < 0)
-                    )
-                    observation["opposite_probability"] = opposite
-                    observation["status"] = (
+        means, stds = predict_response(models[j], candidates)
+        boundary = np.abs(constraints[name].residual(means)) <= boundary_std * stds
+        relevant = supported & (boundary | acquisition_relevant)
+        points = np.concatenate([candidates] * len(variables))
+        dims = np.repeat(variables, len(candidates))
+        eligible = np.tile(relevant, len(variables))
+        for step in range(maximum):
+            try:
+                guide = SignConstrainedGP(models[j], selected[j], softness=softness)
+                derivative_mean, derivative_variance = guide.derivative_marginals(points, dims)
+            except (ValueError, np.linalg.LinAlgError, FloatingPointError) as error:
+                audit.append({"response": name, "status": "derivative_check_failed", "error": str(error)})
+                break
+            signed = np.asarray([kg.PRIOR_SIGN[i][j] for i in dims]) * derivative_mean
+            derivative_std = np.sqrt(derivative_variance)
+            probability = np.where(
+                derivative_std > 1e-12,
+                ndtr(-signed / np.maximum(derivative_std, 1e-12)),
+                (signed < 0).astype(float),
+            )
+            scores = probability * np.asarray([weights[i][j] for i in dims])
+            scores[~eligible | (probability < minimum_probability) | (probability > maximum_probability)] = -np.inf
+            if not np.isfinite(scores).any():
+                break
+            index = int(np.argmax(scores))
+            candidate_index = index % len(candidates)
+            variable = int(dims[index])
+            observation = {
+                "candidate_index": candidate_index,
+                "response": name,
+                "response_index": j,
+                "variable": kg.DESIGN_VARS[variable],
+                "variable_index": variable,
+                "point": candidates[candidate_index].tolist(),
+                "sign": kg.PRIOR_SIGN[variable][j],
+                "weight": float(weights[variable][j]),
+                "opposite_probability": float(probability[index]),
+                "near_constraint_boundary": bool(boundary[candidate_index]),
+                "acquisition_relevant": bool(acquisition_relevant[candidate_index]),
+                "selection_step": step + 1,
+                "status": "selected",
+            }
+            selected[j].append(observation)
+            audit.append(observation)
+            # The selected site's sign and its near duplicates carry the same
+            # information. Other variables remain eligible at this location.
+            start = variables.index(variable) * len(candidates)
+            nearby = np.linalg.norm(candidates - candidates[candidate_index], axis=1) < minimum_distance
+            eligible[start : start + len(candidates)] &= ~nearby
+        # Record unresolved data-prior conflicts in the decision region.
+        informative_count = 0
+        disagreement_count = 0
+        for variable in variables:
+            dim = np.full(len(candidates), variable)
+            mean, variance, _ = derivative_marginals(models[j], candidates, dim)
+            signed = kg.PRIOR_SIGN[variable][j] * mean
+            std = np.sqrt(variance)
+            probability = ndtr(-signed / np.maximum(std, 1e-12))
+            informative_count += int(np.sum(
+                relevant & (probability >= minimum_probability)
+                & (probability <= maximum_probability)
+            ))
+            conflict = relevant & (probability > maximum_probability)
+            disagreement_count += int(np.sum(conflict))
+            if np.any(conflict):
+                index = int(np.argmax(np.where(conflict, probability, -np.inf)))
+                audit.append({
+                    "response": name, "variable": kg.DESIGN_VARS[variable],
+                    "candidate_index": index, "point": candidates[index].tolist(),
+                    "opposite_probability": float(probability[index]),
+                    "conflicting_candidate_count": int(np.sum(conflict)),
+                    "status": (
                         "local_sign_conflict"
-                        if opposite >= conflict_probability
-                        else "capacity_limit"
-                        if len(selected[j]) >= maximum
-                        else "selected"
-                    )
-                except (ValueError, np.linalg.LinAlgError) as error:
-                    observation.update(
-                        status="derivative_check_failed", error=str(error)
-                    )
-                audit.append(observation)
-                if observation["status"] == "selected":
-                    selected[j].append(observation)
+                        if probability[index] >= conflict_probability
+                        else "direction_disagreement"
+                    ),
+                })
+        audit.append({
+            "response": name, "status": "selection_summary",
+            "candidate_count": len(candidates),
+            "supported_candidate_count": int(np.sum(supported)),
+            "relevant_candidate_count": int(np.sum(relevant)),
+            "informative_variable_candidate_count": informative_count,
+            "disagreeing_variable_candidate_count": disagreement_count,
+            "selected_count": len(selected[j]),
+        })
     return selected, audit

@@ -52,7 +52,7 @@ from .surrogate import (
     select_virtual_derivatives,
 )
 
-OPTIMIZATION_SCHEMA_VERSION = 1
+OPTIMIZATION_SCHEMA_VERSION = 2
 
 
 @dataclass(frozen=True)
@@ -286,49 +286,11 @@ def _model_snapshot(config, directory, state, mode, progress):
                 "response_enabled": [False] * len(DISPLACEMENT_METRIC_FIELDS),
             },
         )
-    observations, audit = select_virtual_derivatives(
-        x,
-        y,
-        ids,
-        validation.models,
-        weights,
-        validation.enabled if mode == "knowledge" else [False] * len(DISPLACEMENT_METRIC_FIELDS),
-        config.constraints,
-        maximum=config.max_virtual_derivatives,
-        conflict_probability=config.local_conflict_probability,
-        response_fields=DISPLACEMENT_METRIC_FIELDS,
-    )
-    predictors, inference = [], []
-    for j, response in enumerate(validation.models):
-        try:
-            predictor = SignConstrainedGP(
-                response, observations[j], softness=config.derivative_softness
-            )
-            # Exercise prediction before installing this posterior for acquisition.
-            predictor.predict(x)
-            inference.append(
-                {
-                    "response": DISPLACEMENT_METRIC_FIELDS[j],
-                    "virtual_count": len(observations[j]),
-                    "status": "guided" if predictor.active else "data_only",
-                }
-            )
-        except (ValueError, np.linalg.LinAlgError, FloatingPointError) as error:
-            predictor = SignConstrainedGP(response, [])
-            inference.append(
-                {
-                    "response": DISPLACEMENT_METRIC_FIELDS[j],
-                    "virtual_count": len(observations[j]),
-                    "status": "fallback_data_only",
-                    "error": str(error),
-                }
-            )
-        predictors.append(predictor)
     _json(
         snapshot / "virtual_derivatives.json",
-        {"observations": audit, "inference": inference},
+        {"observations": [], "inference": [], "status": "awaiting_candidate_selection"},
     )
-    return validation, predictors, snapshot
+    return validation, weights, snapshot
 
 
 def acquisition_scores(means, stds, costs, constraints, best_cost):
@@ -351,7 +313,7 @@ def acquisition_scores(means, stds, costs, constraints, best_cost):
 
 
 def _choose_candidate(
-    config, directory, state, domain, validation, predictors, snapshot, progress
+    config, directory, state, domain, validation, weights, snapshot, progress
 ):
     excluded = {point_key(a["point"]) for a in state["attempts"]}
     candidates = sobol_candidates(
@@ -364,6 +326,52 @@ def _choose_candidate(
     )
     costs = np.asarray([domain.cost(point) for point in candidates])
     response_count = len(DISPLACEMENT_METRIC_FIELDS)
+    data_means, data_stds = np.column_stack(
+        [predict_response(model, candidates)[0] for model in validation.models]
+    ), np.column_stack(
+        [predict_response(model, candidates)[1] for model in validation.models]
+    )
+    feasible_costs = [a["cost_per_m"] for a in _successful(state) if a.get("feasible")]
+    best = min(feasible_costs) if feasible_costs else None
+    data_scores = acquisition_scores(data_means, data_stds, costs, config.constraints, best)
+    relevant = np.zeros(len(candidates), dtype=bool)
+    finite = np.flatnonzero(np.isfinite(data_scores))
+    if len(finite):
+        count = max(1, int(np.ceil(0.25 * len(finite))))
+        relevant[finite[np.argsort(-data_scores[finite], kind="stable")[:count]]] = True
+    observed = np.asarray([a["point"] for a in _successful(state)])
+    observations, audit = select_virtual_derivatives(
+        observed, candidates, validation.models, weights, validation.enabled,
+        config.constraints, acquisition_relevant=relevant,
+        softness=config.derivative_softness,
+        maximum=config.max_virtual_derivatives,
+        conflict_probability=config.local_conflict_probability,
+        response_fields=DISPLACEMENT_METRIC_FIELDS,
+    )
+    predictors, inference = [], []
+    for j, response in enumerate(validation.models):
+        try:
+            predictor = SignConstrainedGP(
+                response, observations[j], softness=config.derivative_softness
+            )
+            predictor.predict(candidates[:1])
+            inference.append({
+                "response": DISPLACEMENT_METRIC_FIELDS[j],
+                "virtual_count": len(observations[j]),
+                "status": "guided" if predictor.active else "data_only",
+            })
+        except (ValueError, np.linalg.LinAlgError, FloatingPointError) as error:
+            predictor = SignConstrainedGP(response, [])
+            inference.append({
+                "response": DISPLACEMENT_METRIC_FIELDS[j],
+                "virtual_count": len(observations[j]),
+                "status": "fallback_data_only", "error": str(error),
+            })
+        predictors.append(predictor)
+    audit_payload = {"observations": audit, "inference": inference,
+                     "candidate_count": len(candidates)}
+    _json(snapshot / f"virtual_derivatives_{len(state['attempts']) + 1:04d}.json", audit_payload)
+    _json(snapshot / "virtual_derivatives.json", audit_payload)
     means, stds = np.empty((len(candidates), response_count)), np.empty((len(candidates), response_count))
     failures = []
     for j, predictor in enumerate(predictors):
@@ -379,9 +387,6 @@ def _choose_candidate(
         else np.ones(response_count, dtype=bool)
     )
     # Exploration always uses data-only uncertainty, never artificially tightened knowledge variance.
-    data_stds = np.column_stack(
-        [predict_response(model, candidates)[1] for model in validation.models]
-    )
     uncertainty = np.max((data_stds / scales)[:, eligible], axis=1)
     if np.max(uncertainty) <= 1e-14:
         observed = np.asarray([a["point"] for a in _successful(state)])
@@ -393,10 +398,6 @@ def _choose_candidate(
     elif (_spent(state, adaptive=True) + 1) % config.exploration_interval == 0:
         phase, scores = "uncertainty_exploration", uncertainty
     else:
-        feasible_costs = [
-            a["cost_per_m"] for a in _successful(state) if a.get("feasible")
-        ]
-        best = min(feasible_costs) if feasible_costs else None
         scores = acquisition_scores(means, stds, costs, config.constraints, best)
         phase = "feasibility_search" if best is None else "constrained_improvement"
         if not np.isfinite(scores).any():
@@ -575,7 +576,7 @@ def _run_locked(config, directory, mode, resume, evaluator, domain, progress):
                 )
 
     _export_data(directory, state)
-    validation = predictors = snapshot = None
+    validation = weights = snapshot = None
     fitted_count = -1
     stop_reason = "budget_exhausted"
     while True:
@@ -587,7 +588,7 @@ def _run_locked(config, directory, mode, resume, evaluator, domain, progress):
                 progress(
                     f"fitting {len(successes)} observed samples; evaluations spent {_spent(state)}/{config.total_budget}"
                 )
-            validation, predictors, snapshot = _model_snapshot(
+            validation, weights, snapshot = _model_snapshot(
                 config, directory, state, mode, progress
             )
             fitted_count = len(successes)
@@ -634,7 +635,7 @@ def _run_locked(config, directory, mode, resume, evaluator, domain, progress):
                     state,
                     domain,
                     validation,
-                    predictors,
+                    weights,
                     snapshot,
                     progress,
                 )

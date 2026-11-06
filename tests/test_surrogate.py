@@ -103,6 +103,21 @@ class DerivativeKernelTests(unittest.TestCase):
         ):
             np.testing.assert_array_equal(actual, expected)
 
+    def test_guided_derivative_matches_finite_difference_of_guided_mean(self):
+        response = fixed_response()
+        anchor = np.full(8, 0.5)
+        guide = SignConstrainedGP(response, [{
+            "point": anchor.tolist(), "variable_index": 0,
+            "sign": -1, "weight": 1.0,
+        }])
+        mean, variance = guide.derivative_marginals(anchor[None, :], np.array([0]))
+        plus, minus = anchor.copy(), anchor.copy()
+        plus[0] += 1e-5
+        minus[0] -= 1e-5
+        numerical = (guide.predict(plus[None, :])[0][0] - guide.predict(minus[None, :])[0][0]) / 2e-5
+        self.assertAlmostEqual(mean[0], numerical, places=5)
+        self.assertGreaterEqual(variance[0], 0)
+
 
 class ValidationTests(unittest.TestCase):
     def test_loo_refits_each_fold_and_computes_pooled_r2(self):
@@ -146,50 +161,45 @@ class ValidationTests(unittest.TestCase):
 
 
 class VirtualSelectionTests(unittest.TestCase):
-    def test_two_variables_per_response_zero_edges_excluded_and_cap_obeyed(self):
-        x = np.random.default_rng(1).random((3, 8))
+    def test_iterative_selection_uses_candidate_posterior_and_cap(self):
+        x = np.full((3, 8), 0.5)
+        x[:, 0] = [0.1, 0.5, 0.9]
+        candidates = x.copy()
+        candidates[:, 0] = [0.2, 0.4, 0.8]
         weights = np.zeros((8, 5))
         weights[0, 0], weights[1, 0], weights[2, 1], weights[3, 1] = 0.9, 0.8, 0.9, 0.7
-        with patch(
-            "geostudio_automation.surrogate.derivative_posterior",
-            return_value=(np.array([0.0]), np.eye(1), None, None),
-        ):
-            chosen, audit = select_virtual_derivatives(
-                x,
-                np.ones((3, 5)),
-                ["a", "b", "c"],
-                [fixed_response()] * 5,
-                weights,
-                [True, True, False, False, False],
-                {name: Constraint(0, "<=") for name in METRIC_FIELDS},
-                maximum=3,
-            )
-        self.assertEqual({o["variable_index"] for o in chosen[0]}, {0, 1})
-        self.assertEqual({o["variable_index"] for o in chosen[1]}, {2, 3})
-        self.assertEqual([len(v) for v in chosen], [3, 3, 0, 0, 0])
-        self.assertTrue(any(o["status"] == "capacity_limit" for o in audit))
+        chosen, audit = select_virtual_derivatives(
+            x, candidates, [fixed_response()] * 5, weights,
+            [True, True, False, False, False],
+            {name: Constraint(0, "<=") for name in METRIC_FIELDS},
+            acquisition_relevant=np.ones(len(candidates), dtype=bool), maximum=3,
+        )
+        self.assertTrue(chosen[0])
+        self.assertTrue(chosen[1])
+        self.assertTrue(all(len(v) <= 3 for v in chosen))
+        self.assertEqual(chosen[2:], [[], [], []])
+        self.assertTrue(all(o["status"] == "selected" for o in chosen[0] + chosen[1]))
+        self.assertTrue(all(0.1 <= o["opposite_probability"] <= 0.5 for o in chosen[0] + chosen[1]))
+        self.assertTrue(all(o["point"] in candidates.tolist() for o in chosen[0] + chosen[1]))
 
-    def test_lower_bound_violation_and_local_conflict(self):
+    def test_conflicting_direction_is_audited_not_forced(self):
         weights = np.zeros((8, 5))
         weights[0, 0] = 1
+        candidates = np.full((1, 8), 0.5)
         with patch(
-            "geostudio_automation.surrogate.derivative_posterior",
-            return_value=(np.array([10.0]), np.eye(1), None, None),
+            "geostudio_automation.surrogate.derivative_marginals",
+            return_value=(np.array([10.0]), np.array([1.0]), None),
         ):
             chosen, audit = select_virtual_derivatives(
-                np.full((1, 8), 0.5),
-                np.zeros((1, 5)),
-                ["a"],
+                np.full((3, 8), 0.5), candidates,
                 [fixed_response()] * 5,
                 weights,
                 [True] * 5,
                 {name: Constraint(1, ">=") for name in METRIC_FIELDS},
+                acquisition_relevant=np.ones(1, dtype=bool),
             )
         self.assertEqual(chosen[0], [])
-        self.assertEqual(
-            audit[0]["sign"], -1
-        )  # Raw response prior is not flipped for a lower bound.
-        self.assertEqual(audit[0]["status"], "local_sign_conflict")
+        self.assertTrue(any(o["status"] == "local_sign_conflict" for o in audit))
 
 
 if __name__ == "__main__":

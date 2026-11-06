@@ -264,10 +264,21 @@ uv run python -m geostudio_automation optimize `
 ### 算法与预算
 
 1. 配置 initial_dataset 时先验证参数哈希、几何、XML 和逐维拉丁分层并导入初始结果；否则在八维边界内生成 LHS。通过维度配对交换和层内重采样修复几何，保持每维每层恰好一点。默认最多 10 次初始化、每次 2,000 次修复；失败明确退出，不静默缩小设计空间。实际计算前再次验证 XML。失败初始样本在原来的八维分层单元内补点。
-2. 三个位移响应分别使用 `Constant × Matérn(ν=2.5) + WhiteKernel` GP。输入按固定设计边界归一化；每次训练单独计算响应均值和标准差。留一法逐折重新拟合标准化参数和核超参数，合并全部留一预测计算 R²。每个响应以 R²≥0.75 单独启停知识；常量响应及无效 R² 不启用知识。
+2. 三个位移响应分别使用 `Constant × Matérn(ν=2.5) + WhiteKernel` GP。输入按固定设计边界归一化；每次训练单独计算响应均值和标准差。留一法逐折重新拟合标准化参数和核超参数，合并全部留一预测计算 R²。正式示例配置将知识门槛设为 R²≥0.75，各响应单独启停；常量响应及无效 R² 不启用知识。
 3. 仅使用纯数据 GP 校准现有 ALE 知识边。每次新样本后重新计算；反向、弱效应或不稳定边熔断，不翻转专家方向。没有响应通过精度门控时，先补充高不确定性样本。
-4. 对真实超限响应的已激活边选取权重最大的两个变量。以超限样本为锚点，注入 `Phi(sign × derivative / softness)^weight` 的软符号似然；导数按先验导数标准差缩放，`softness` 默认 0.1。权重不是导数数值。条件导数后验通过白化 Laplace 近似推断，核超参数不受虚拟观测重新拟合。每个响应最多 20 条，按标准化超限程度排序，若局部相反方向概率≥0.8 则跳过。数值失败会记录并退回纯数据预测。
-5. 每轮筛选 512 个几何可行、未评估的 Sobol 候选，直接计算造价。没有真实可行解时最大化联合可行概率；已有可行解时最大化 `(best_feasible_cost - cost)+ × P(feasible)`。响应 GP 相互独立，可行概率在对数域累计。每第 5 次自适应评估以及所有改进得分为零时，选择纯数据模型的不确定性探索点；完全常量时以距已有样本的最小距离填充空间。
+4. 每轮先筛选 512 个几何可行、未评估的 Sobol 候选，直接计算造价。对已激活知识边，每个响应保留权重最大的两个变量，用纯数据 GP 计算候选处导数违反先验方向的概率 `q=P(sign × derivative<0 | 真实数据)`。候选需处于已有样本的经验覆盖范围，且位于预测约束边界 2 个标准差内，或属于纯数据采集得分最高的 25%。优先选择 `0.1≤q≤0.5` 的位置；每选一处，利用当前软符号后验重新计算其余候选的导数概率，并避开同一变量 0.15 归一化距离内的重复点。每个响应最多 20 条；`q>0.5` 的区域仅记录方向分歧，达到 `local_conflict_probability` 时标为局部冲突，不强行注入。上述位置阈值是本实验的预设规则，不是论文通用阈值。
+5. 在所选位置注入 `Phi(sign × derivative / softness)^weight` 的软符号似然；导数按先验导数标准差缩放，`softness` 默认 0.1。权重不是导数数值。条件导数后验通过白化 Laplace 近似推断，核超参数不受虚拟观测重新拟合。数值失败会记录并退回纯数据预测。没有真实可行解时最大化联合可行概率；已有可行解时最大化 `(best_feasible_cost - cost)+ × P(feasible)`。响应 GP 相互独立，可行概率在对数域累计。每第 5 次自适应评估以及所有改进得分为零时，选择纯数据模型的不确定性探索点；完全常量时以距已有样本的最小距离填充空间。
+
+可先对已有检查点离线重放一个选点决策，**不会启动 GeoStudio 求解**：
+
+```powershell
+uv run python -m scripts.replay_virtual_derivatives `
+  --config examples/optimization.json `
+  --checkpoint runs/knowledge_bo_displacement/checkpoint.json `
+  --samples 20 --output runs/virtual_replay_20
+```
+
+输出 `replay_summary.json` 和 `iterations/samples_0020/virtual_derivatives.json`，可检查虚拟点、每次选择时的 `q`、方向分歧与下一推荐方案。新的放点逻辑使用新的检查点版本；既有优化实验请保留原目录，新实验使用新输出目录。
 
 留一验证衡量当前样本上的泛化表现，不等同于整个可行域的精度证明。算法不会宣称找到全局最优解或保证知识必定加速收敛；`plain` 模式和统一日志用于后续检验。
 
@@ -279,7 +290,7 @@ uv run python -m geostudio_automation optimize `
 - `initial_designs.csv`：最初修复后的 LHS；`initial_designs_final.csv`：替换失败点后真正成功的初始设计。
 - `dataset.csv`：成功评估的八变量、三个位移响应与 `cost_per_m`；优化内部的知识校准只读取这三列。
 - `optimization_history.csv`：各次评估的阶段、预算、失败原因与最佳可行造价。
-- `iterations/samples_NNNN/`：逐响应留一结果、预测 CSV、校准矩阵与边审计、虚拟导数及推断状态、候选选择记录。
+- `iterations/samples_NNNN/`：逐响应留一结果、预测 CSV、校准矩阵与边审计、逐次尝试的 `virtual_derivatives_XXXX.json`、最新虚拟导数状态及候选选择记录。
 - `runs/eval_NNNN/`：逐设计原有阶段报告、提取文件与带结果文件哈希的 `evaluation.json`。
 - `optimization_report.json`、`best_design.json`、`convergence.png`：结果汇总和曲线。没有真实可行解时最佳设计为空，另列标准化违约量最小的已评估设计，不把代理预测当作可行解。
 
@@ -287,7 +298,7 @@ uv run python -m geostudio_automation optimize `
 
 程序入口为 `ExperimentConfig.from_json(...)` 和 `run_optimization(config, output_directory, ...)`。后者允许传入 `Evaluator` 实现：提供稳定的 `fingerprint`、`evaluate(design, directory, charge)` 和 `recover(design, directory)`；昂贵操作前必须调用一次 `charge()`，成功结果必须包含三个有限位移响应值。`GeoStudioEvaluator` 是正式后端，`SimulatedEvaluator` 是示例后端。`calibrate_kg_edges` 新增可选的 `response_models`、`response_enabled`，复用纯数据拟合并校验其训练集，原命令和默认行为保持兼容。
 
-方法参考：[虚拟导数符号观测](https://proceedings.mlr.press/v9/riihimaki10a.html)；[约束贝叶斯优化](https://proceedings.mlr.press/v32/gardner14.html)。本实现使用 Laplace 近似，前者论文使用 EP，二者推断方法不同。
+方法参考：[虚拟导数符号观测与迭代选位](https://proceedings.mlr.press/v9/riihimaki10a.html)；[约束贝叶斯优化](https://proceedings.mlr.press/v32/gardner14.html)。本实现使用 Laplace 近似，前者论文使用 EP，二者推断方法不同。
 
 ## 测试
 

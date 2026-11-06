@@ -215,7 +215,7 @@ class OptimizationWorkflowTests(unittest.TestCase):
                 ),
             ):
                 result = run_optimization(
-                    configuration(adaptive_budget=0, total_budget=4),
+                    configuration(adaptive_budget=1, total_budget=5),
                     out,
                     domain=BoxDomain(),
                     evaluator=ToyEvaluator(),
@@ -223,7 +223,7 @@ class OptimizationWorkflowTests(unittest.TestCase):
             audit = json.loads(
                 (out / "iterations/samples_0004/virtual_derivatives.json").read_text()
             )
-            self.assertEqual(result.successful_samples, 4)
+            self.assertEqual(result.successful_samples, 5)
             self.assertEqual(audit["inference"][0]["status"], "fallback_data_only")
 
     @patch(
